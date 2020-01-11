@@ -15,5 +15,14 @@ public class Lot {
 		super();
 		this.cars = cars;
 	}
+
+	public List<Car> getCars() {
+		return cars;
+	}
+
+	public void setCars(List<Car> cars) {
+		this.cars = cars;
+	}
+	
 	
 }
