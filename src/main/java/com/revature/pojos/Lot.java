@@ -24,5 +24,4 @@ public class Lot {
 		this.cars = cars;
 	}
 	
-	
 }

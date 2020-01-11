@@ -1,5 +1,8 @@
 package com.revature.pojos;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Car {
 
 	private String vin;
@@ -9,13 +12,14 @@ public class Car {
 	private boolean isNew;
 	private int year;
 	private int mileage;
-	private float price;
+	private int price;
+	private List<Offer> offers = new ArrayList<Offer>();
 	
 	public Car() {
 		super();
 	}
 
-	public Car(String vin, String make, String model, String color, boolean isNew, int year, int mileage, float price) {
+	public Car(String vin, String make, String model, String color, boolean isNew, int year, int mileage, int price) {
 		super();
 		this.vin = vin;
 		this.make = make;
@@ -83,12 +87,20 @@ public class Car {
 		this.mileage = mileage;
 	}
 	
-	public float getPrice() {
+	public int getPrice() {
 		return price;
 	}
 	
-	public void setPrice(float price) {
+	public void setPrice(int price) {
 		this.price = price;
+	}
+
+	public List<Offer> getOffers() {
+		return offers;
+	}
+
+	public void setOffers(List<Offer> offers) {
+		this.offers = offers;
 	}
 	
 	
