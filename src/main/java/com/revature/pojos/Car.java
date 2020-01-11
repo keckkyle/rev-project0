@@ -102,6 +102,14 @@ public class Car {
 	public void setOffers(List<Offer> offers) {
 		this.offers = offers;
 	}
-	
+
+	@Override
+	public String toString() {
+		String carDetails = color + " " + year + " " + make + " " + model;
+		if(isNew) {
+			return "New " + carDetails; 
+		} 
+		return "Used " + carDetails;
+	}
 	
 }
