@@ -36,5 +36,10 @@ public class TestFunctions {
 		User testUser = new Customer("Kyle","keckkyle","asdfghjkl");
 		assertEquals(testUser.toString(), uls.createNewUser().toString());
 	}
+	
+	@Test
+	public void testUserArrayFile() {
+		
+	}
 
 }
