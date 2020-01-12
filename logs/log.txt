@@ -5,3 +5,39 @@
 2020-01-12 11:10:37 DEBUG root:19 - myTestFiles\testUsers.dat (The system cannot find the path specified)
 2020-01-12 11:52:48 DEBUG root:19 - testFiles\testUsers.dat (The system cannot find the path specified)
 2020-01-12 11:52:48 DEBUG root:19 - testFiles\testUsers.dat (The system cannot find the path specified)
+2020-01-12 14:25:01 DEBUG root:19 - /testLot is not a directory
+2020-01-12 14:28:40 DEBUG root:19 - \testLot is a directory
+2020-01-12 14:30:19 DEBUG root:19 - \testLot is a directory
+2020-01-12 14:31:22 DEBUG root:19 - /testLot is a directory
+2020-01-12 14:32:43 DEBUG root:19 - /testLot is a directory
+2020-01-12 14:33:49 DEBUG root:19 - /testLot is a directory
+2020-01-12 14:34:40 DEBUG root:19 - \testLot is a directory
+2020-01-12 14:34:52 DEBUG root:19 - \testLot is a directory
+2020-01-12 14:36:01 DEBUG root:19 - /testLotis not a directory
+2020-01-12 14:36:11 DEBUG root:19 - /testLot is a directory
+2020-01-12 14:45:47 DEBUG root:19 - C:\Users\keckk\repos\project0\testLotis not a directory
+2020-01-12 14:50:14 DEBUG root:19 - C:\Users\keckk\repos\project0\testLotis not a directory
+2020-01-12 14:50:28 DEBUG root:19 - C:\Users\keckk\repos\project0\testLot is a directory
+2020-01-12 14:57:41 DEBUG root:19 - C:\Users\keckk\repos\project0\testLot is not a directory
+2020-01-12 14:57:52 DEBUG root:19 - C:\Users\keckk\repos\project0\testLot is a directory
+2020-01-12 15:17:23 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:17:23 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:18:08 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:18:08 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:18:29 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:18:29 DEBUG root:19 - testLot\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:27:40 DEBUG root:19 - Test_Files\testUsers.dat (The system cannot find the path specified)
+2020-01-12 15:27:40 DEBUG root:19 - testUsers.dat (The system cannot find the file specified)
+2020-01-12 15:30:06 DEBUG root:19 - testUsers.dat (The system cannot find the file specified)
+2020-01-12 17:10:47 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john]
+2020-01-12 17:11:34 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john]
+2020-01-12 17:14:24 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john]
+2020-01-12 17:20:04 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john]
+2020-01-12 17:24:32 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle]
+2020-01-12 17:26:33 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle]
+2020-01-12 17:28:45 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle]
+2020-01-12 17:36:09 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle]
+2020-01-12 17:42:42 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle]
+2020-01-12 17:44:02 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234]
+2020-01-12 17:46:45 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234, Sam: sam]
+2020-01-12 17:49:11 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234, Sam: sam, Tom: tom]

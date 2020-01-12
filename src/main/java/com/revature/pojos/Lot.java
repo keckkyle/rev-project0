@@ -12,12 +12,12 @@ public class Lot implements Serializable {
 	private List<User> users = new ArrayList<User>();
 
 	public Lot() {
-		super();
-		this.name = "Unnamed Lot";
+		this("unnamedlot");
 	}
 
 	public Lot(String name) {
 		super();
+		name = name.replaceAll(" ", "_");
 		this.name = name;
 	}
 

@@ -7,15 +7,11 @@ public class User implements Serializable {
 	private String name;
 	private String username;
 	private String password;
-	
-	public User() {
-		super();
-	}
 
 	public User(String name, String username, String password) {
 		super();
 		this.name = name;
-		this.username = username;
+		this.username = username.toLowerCase();
 		this.password = password;
 	}
 
@@ -32,7 +28,7 @@ public class User implements Serializable {
 	}
 	
 	public void setUsername(String username) {
-		this.username = username;
+		this.username = username.toLowerCase();
 	}
 	
 	public String getPassword() {
@@ -45,7 +41,7 @@ public class User implements Serializable {
 
 	@Override
 	public String toString() {
-		return getName();
+		return getName()+ ": " + getUsername();
 	}
 	
 	

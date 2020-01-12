@@ -9,10 +9,6 @@ public class Customer extends User implements Serializable {
 	private List<Car> userCars = new ArrayList<Car>();
 	private List<Payment> payments = new ArrayList<Payment>();
 
-	public Customer() {
-		super();
-	}
-
 	public Customer(String name, String username, String password) {
 		super(name, username, password);
 	}

@@ -1,16 +1,26 @@
 package com.revature.services;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
+import com.revature.dao.ArrayDAO;
+import com.revature.dao.UserDAOSerialization;
 import com.revature.pojos.Customer;
 import com.revature.pojos.User;
+//import com.revature.util.LoggerUtil;
 
 public class UserLoginService {
 	
-	private static List<User> userDB = new ArrayList<User>();
+//	private static LoggerUtil log = new LoggerUtil();
+	private static List<User> userDB;
 	private static Scanner scan = new Scanner(System.in);
+	
+	private ArrayDAO<User> uDao = new UserDAOSerialization();
+	
+	public UserLoginService() {
+		super();
+		userDB = uDao.readArray("Test_Files/testUsers");
+	}
 	
 	public User createNewUser() {
 		String username = null;
@@ -20,8 +30,8 @@ public class UserLoginService {
 		while(username == null) {
 			System.out.println("Please provide a username:");
 			String usernameInput = scan.nextLine();
-			if(searchUsers(usernameInput) == null) {
-				username = usernameInput;
+			if(searchUsers(usernameInput.toLowerCase()) == null) {
+				username = usernameInput.toLowerCase();
 			} else {
 				System.out.println("Username is unavailable.");
 			}
@@ -32,6 +42,8 @@ public class UserLoginService {
 		User newUser = new Customer(name, username, password);
 		userDB.add(newUser);
 		
+		uDao.createArray(userDB, "Test_Files/testUsers");
+		
 		return newUser;
 	}
 	
@@ -40,7 +52,7 @@ public class UserLoginService {
 		System.out.println("User login");
 		System.out.println("Username: ");
 		String username = scan.nextLine();
-		User user = searchUsers(username);
+		User user = searchUsers(username.toLowerCase());
 		if(user == null) {
 			System.out.println("User not found");
 			return null;
