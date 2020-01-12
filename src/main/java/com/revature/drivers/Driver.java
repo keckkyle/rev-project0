@@ -20,8 +20,8 @@ public class Driver {
 
 	public static void main(String[] args) {
 		
-		myLot = lotDao.readLot("testLot");
-//		myLot = new Lot("testLot");
+//		myLot = lotDao.readLot("testLot");
+		myLot = new Lot("testLot");
 
 		
 		String option = " ";
@@ -51,7 +51,7 @@ public class Driver {
 			break;
 		case "2":
 			System.out.println();
-			User currentUser = uls.authenticateUser();
+//			User currentUser = uls.authenticateUser();
 			break;
 		case "3":
 			System.out.println("Admin Login");
