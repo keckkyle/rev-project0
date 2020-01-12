@@ -1,6 +1,8 @@
 package com.revature.pojos;
 
-public class Offer {
+import java.io.Serializable;
+
+public class Offer implements Serializable {
 	
 	private User customer;
 	private int amount;

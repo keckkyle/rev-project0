@@ -1,9 +1,10 @@
 package com.revature.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Car {
+public class Car implements Serializable {
 
 	private String vin;
 	private String make;

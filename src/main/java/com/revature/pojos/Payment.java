@@ -1,6 +1,8 @@
 package com.revature.pojos;
 
-public class Payment {
+import java.io.Serializable;
+
+public class Payment implements Serializable {
 	
 	private Car car;
 	private int amount;
