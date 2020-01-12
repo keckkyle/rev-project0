@@ -30,5 +30,12 @@ public class Offer {
 	public void setAmount(int amount) {
 		this.amount = amount;
 	}
+
+	@Override
+	public String toString() {
+		return customer.toString() + " offers $" + amount;
+	}
+	
+	
 	 
 }

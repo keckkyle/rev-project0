@@ -1,9 +1,10 @@
 package com.revature.pojos;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Customer extends User {
+public class Customer extends User implements Serializable {
 	
 	private List<Car> userCars = new ArrayList<Car>();
 	private List<Payment> payments = new ArrayList<Payment>();
