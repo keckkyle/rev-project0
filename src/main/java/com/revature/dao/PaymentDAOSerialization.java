@@ -9,7 +9,7 @@ import java.io.ObjectOutputStream;
 import java.util.ArrayList;
 import java.util.List;
 
-import com.revature.pojos.Offer;
+import com.revature.pojos.Payment;
 import com.revature.util.LoggerUtil;
 
 public class PaymentDAOSerialization implements ArrayDAO<Payment> {

@@ -15,14 +15,22 @@ import com.revature.services.UserLoginService;
 import com.revature.dao.ArrayDAO;
 import com.revature.dao.CarDAOSerialization;
 import com.revature.dao.OfferDAOSerialization;
+import com.revature.dao.PaymentDAOSerialization;
 import com.revature.dao.UserDAOSerialization;
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
 import com.revature.pojos.Employee;
 import com.revature.pojos.Offer;
+import com.revature.pojos.Payment;
 import com.revature.pojos.User;
 
 public class TestFunctions {
+	
+	User user1 = new Customer("Kyle", "Kyle", "Kyle");
+	User user2 = new Customer("Bob", "Bob", "Bob");
+	User user3 = new Employee("John", "John", "John");
+	Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, 2020, 0, 45590);
+	Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, 2005, 167043, 6500);
 
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -43,17 +51,16 @@ public class TestFunctions {
 	@Test
 	public void testIfUserCreated() {
 		UserLoginService uls = new UserLoginService();
-		User testUser = new Customer("Kyle","keckkyle","asdfghjkl");
-		assertEquals(testUser.toString(), uls.createNewUser().toString());
+		assertEquals(user1.toString(), uls.createNewUser().toString());
 	}
 	
 	@Test
 	public void testUserArrayFile() {
 		ArrayDAO<User> uDao = new UserDAOSerialization();
 		List<User> users = new ArrayList<>();
-		users.add(new Customer("Kyle", "Kyle", "Kyle"));
-		users.add(new Customer("Bob", "Bob", "Bob"));
-		users.add(new Employee("John", "John", "John"));
+		users.add(user1);
+		users.add(user2);
+		users.add(user3);
 		uDao.createArray(users, "testFiles/testUsers");
 		
 		List<User> deserialized = uDao.readArray("testFiles/testUsers");
@@ -67,8 +74,8 @@ public class TestFunctions {
 	public void testCarArrayFile() {
 		ArrayDAO<Car> cDao = new CarDAOSerialization();
 		List<Car> cars = new ArrayList<>();
-		cars.add(new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, 2020, 0, 45590));
-		cars.add(new Car("14HG8", "Ford", "Focus", "Red", false, 2005, 167043, 6500));
+		cars.add(car1);
+		cars.add(car2);
 		cDao.createArray(cars, "TestFiles/testCars");
 		
 		List<Car> deserialized = cDao.readArray("TestFiles/testCars");
@@ -80,8 +87,6 @@ public class TestFunctions {
 	@Test
 	public void testOfferArrayFile() {
 		ArrayDAO<Offer> oDao = new OfferDAOSerialization();
-		User user1 = new User("Kyle","Kyle","Kyle");
-		User user2 = new User("Bob","Bob","Bob");
 		List<Offer> offers = new ArrayList<>();
 		offers.add(new Offer(user1, 15024));
 		offers.add(new Offer(user2, 16100));
@@ -91,5 +96,19 @@ public class TestFunctions {
 		
 		assertEquals(offers.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(offers.get(1).toString(), deserialized.get(1).toString());
+	}
+	
+	@Test
+	public void testPaymentArrayFile() {
+		ArrayDAO<Payment> pDao = new PaymentDAOSerialization();
+		List<Payment> payments = new ArrayList<>();
+		payments.add(new Payment(car1, 15024));
+		payments.add(new Payment(car2, 16100));
+		pDao.createArray(payments, "TestFiles/testPayments");
+		
+		List<Payment> deserialized = pDao.readArray("TestFiles/testPayments");
+		
+		assertEquals(payments.get(0).toString(), deserialized.get(0).toString());
+		assertEquals(payments.get(1).toString(), deserialized.get(1).toString());
 	}
 }
