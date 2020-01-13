@@ -53,3 +53,15 @@
 2020-01-13 00:00:38 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
 2020-01-13 00:23:48 DEBUG root:19 - index:-1
 2020-01-13 00:26:37 DEBUG root:19 - index:-1
+2020-01-13 14:18:50 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 2551123696426246999, local class serialVersionUID = 3525401305164052888
+2020-01-13 14:34:31 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:31 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:31 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:31 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:31 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:48 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:48 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:34:48 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = 3525401305164052888, local class serialVersionUID = -2430161085455075621
+2020-01-13 14:41:27 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -2430161085455075621, local class serialVersionUID = 8072018738458683541
+2020-01-13 15:07:59 DEBUG root:19 - C5HL5
+2020-01-13 15:07:59 DEBUG root:19 - 14HG8

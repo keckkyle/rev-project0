@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import com.revature.services.CarManagementService;
+import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.dao.ArrayDAO;
 import com.revature.dao.CarDAOSerialization;
@@ -31,6 +32,8 @@ public class TestFunctions {
 	
 	private UserLoginService uls = new UserLoginService();
 	private CarManagementService cms = new CarManagementService();
+	private PaymentManagementService pms = new PaymentManagementService();
+	
 	private ArrayDAO<User> uDao = new UserDAOSerialization();
 	private ArrayDAO<Car> cDao = new CarDAOSerialization();
 	private ArrayDAO<Offer> oDao = new OfferDAOSerialization();
@@ -97,6 +100,8 @@ public class TestFunctions {
 	
 	@Test
 	public void testUserArrayFile() {
+//		uDao.createArray(users, "Test_Files/testUsers");
+		
 		List<User> deserialized = uDao.readArray("Test_Files/testUsers");
 		
 		assertEquals(users.get(0).toString(), deserialized.get(0).toString());
@@ -106,6 +111,8 @@ public class TestFunctions {
 	
 	@Test
 	public void testCarArrayFile() {
+//		cDao.createArray(cars, "Test_Files/testOffers");
+		
 		List<Car> deserialized = cDao.readArray("Test_Files/testCars");
 		
 		assertEquals(cars.get(0).toString(), deserialized.get(0).toString());
@@ -114,6 +121,8 @@ public class TestFunctions {
 
 	@Test
 	public void testOfferArrayFile() {
+//		oDao.createArray(offers, "Test_Files/testOffers");
+		
 		List<Offer> deserialized = oDao.readArray("Test_Files/testOffers");
 		
 		assertEquals(offers.get(0).toString(), deserialized.get(0).toString());
@@ -122,6 +131,8 @@ public class TestFunctions {
 	
 	@Test
 	public void testPaymentArrayFile() {
+		pDao.createArray(payments, "Test_Files/testPayments");
+		
 		List<Payment> deserialized = pDao.readArray("Test_Files/testPayments");
 		
 		assertEquals(payments.get(0).toString(), deserialized.get(0).toString());
@@ -154,4 +165,14 @@ public class TestFunctions {
 		assertEquals(before.size()-1, after.size());
 	}
 	
+	@Test 
+	public void viewUserPayments() {
+		System.out.println("Test viewPaymets():");
+		pms.viewPayments();
+	}
+	
+	@Test
+	public void showRemainingPayments() {
+		pms.getCarPayments(car1);
+	}
 }
