@@ -11,6 +11,7 @@ import org.junit.AfterClass;
 import org.junit.Before;
 import org.junit.BeforeClass;
 
+import com.revature.services.CarManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.dao.ArrayDAO;
 import com.revature.dao.CarDAOSerialization;
@@ -29,6 +30,7 @@ import com.revature.pojos.User;
 public class TestFunctions {
 	
 	private UserLoginService uls = new UserLoginService();
+	private CarManagementService cms = new CarManagementService();
 	private ArrayDAO<User> uDao = new UserDAOSerialization();
 	private ArrayDAO<Car> cDao = new CarDAOSerialization();
 	private ArrayDAO<Offer> oDao = new OfferDAOSerialization();
@@ -37,8 +39,8 @@ public class TestFunctions {
 	private User user1 = new Customer("Kyle", "Kyle", "Kyle");
 	private User user2 = new Customer("Bob", "Bob", "Bob");
 	private User user3 = new Employee("John", "John", "John");
-	private Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, 2020, 0, 45590);
-	private Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, 2005, 167043, 6500);
+	private Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
+	private Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, "2005", "167043", 6500);
 	private Lot lot = new Lot("Test Files");
 	
 	private List<Car> cars = new ArrayList<>();
@@ -125,4 +127,31 @@ public class TestFunctions {
 		assertEquals(payments.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(payments.get(1).toString(), deserialized.get(1).toString());
 	}
+	
+	@Test 
+	public void viewCarsOnLot() {
+		System.out.println("Test viewCars():");
+		cms.viewCars();
+	}
+	
+	@Test
+	public void addCarToLot() {
+		List<Car> before = cDao.readArray("Test_Files/testCars");
+		
+		cms.addCar();
+		
+		List<Car> after = cDao.readArray("Test_Files/testCars");
+		assertEquals(before.size()+1, after.size());
+	}
+	
+	@Test
+	public void removeCarFromLot() {
+		List<Car> before = cDao.readArray("Test_Files/testCars");
+		
+		cms.removeCar(car1);
+		
+		List<Car> after = cDao.readArray("Test_Files/testCars");
+		assertEquals(before.size()-1, after.size());
+	}
+	
 }

@@ -41,3 +41,15 @@
 2020-01-12 17:44:02 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234]
 2020-01-12 17:46:45 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234, Sam: sam]
 2020-01-12 17:49:11 DEBUG root:19 - [Kyle: kyle, Bob: bob, John: john, Kyle: keckkyle, Kyle: kyle1234, Sam: sam, Tom: tom]
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:56:51 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:58:11 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:58:11 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-12 23:59:36 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-13 00:00:38 DEBUG root:19 - com.revature.pojos.Car; local class incompatible: stream classdesc serialVersionUID = 5211592729509335537, local class serialVersionUID = 4178172927577311763
+2020-01-13 00:23:48 DEBUG root:19 - index:-1
+2020-01-13 00:26:37 DEBUG root:19 - index:-1

@@ -11,8 +11,8 @@ public class Car implements Serializable {
 	private String model;
 	private String color;
 	private boolean isNew;
-	private int year;
-	private int mileage;
+	private String year;
+	private String mileage;
 	private int price;
 	private List<Offer> offers = new ArrayList<Offer>();
 	
@@ -20,7 +20,7 @@ public class Car implements Serializable {
 		super();
 	}
 
-	public Car(String vin, String make, String model, String color, boolean isNew, int year, int mileage, int price) {
+	public Car(String vin, String make, String model, String color, boolean isNew, String year, String mileage, int price) {
 		super();
 		this.vin = vin;
 		this.make = make;
@@ -72,19 +72,19 @@ public class Car implements Serializable {
 		this.isNew = isNew;
 	}
 
-	public int getYear() {
+	public String getYear() {
 		return year;
 	}
 	
-	public void setYear(int year) {
+	public void setYear(String year) {
 		this.year = year;
 	}
 	
-	public int getMileage() {
+	public String getMileage() {
 		return mileage;
 	}
 	
-	public void setMileage(int mileage) {
+	public void setMileage(String mileage) {
 		this.mileage = mileage;
 	}
 	
@@ -106,7 +106,7 @@ public class Car implements Serializable {
 
 	@Override
 	public String toString() {
-		String carDetails = color + " " + year + " " + make + " " + model;
+		String carDetails = year + " " + color + " " + make + " " + model;
 		if(isNew) {
 			return "New " + carDetails; 
 		} 
