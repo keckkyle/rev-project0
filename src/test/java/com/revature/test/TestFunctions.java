@@ -12,6 +12,7 @@ import org.junit.Before;
 import org.junit.BeforeClass;
 
 import com.revature.services.CarManagementService;
+import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.dao.ArrayDAO;
@@ -33,6 +34,7 @@ public class TestFunctions {
 	private UserLoginService uls = new UserLoginService();
 	private CarManagementService cms = new CarManagementService();
 	private PaymentManagementService pms = new PaymentManagementService();
+	private OfferManagementService oms = new OfferManagementService();
 	
 	private ArrayDAO<User> uDao = new UserDAOSerialization();
 	private ArrayDAO<Car> cDao = new CarDAOSerialization();
@@ -174,5 +176,21 @@ public class TestFunctions {
 	@Test
 	public void showRemainingPayments() {
 		pms.getCarPayments(car1);
+	}
+	
+	@Test 
+	public void viewAlloffers() {
+		System.out.println("Test viewOffers():");
+		oms.viewOffers();
+	}
+	
+	@Test
+	public void makeNewOffer() {
+		List<Offer> before = oDao.readArray("Test_Files/testOffers");
+		
+		oms.makeOffer(user2);
+		
+		List<Offer> after = oDao.readArray("Test_Files/testOffers");
+		assertEquals(before.size()+1, after.size());
 	}
 }
