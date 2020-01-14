@@ -1,12 +1,8 @@
 package com.revature.menus;
 
-import java.util.Scanner;
-
 import com.revature.pojos.Car;
 
 public class CustomerMenu extends Menu {
-	
-	private static Scanner scan = new Scanner(System.in);
 	
 	public CustomerMenu() {
 		super();
@@ -33,34 +29,53 @@ public class CustomerMenu extends Menu {
 		case "1":
 			System.out.println();
 			cms.viewCars();
-			System.out.println();
+			userWait();
 			break;
 		case "2":
 			System.out.println();
+			cms.viewCars();
 			System.out.println("Provide car number you wish to put an offer on:");
 			String carNumStr = scan.nextLine();
-			carNumStr = carNumStr.replaceAll("\\D", "");
-			int carNum = Integer.parseInt(carNumStr);
-			Car car = carDB.get(carNum-1);
-			oms.makeOffer(current, car);
+			if(!"".equals(carNumStr)) {
+				int carNum = stringToInteger(carNumStr);
+				if(carNum > 0 && carNum <= carDB.size()) {
+					Car car = carDB.get(carNum-1);
+					oms.makeOffer(current, car);
+				} else {
+					System.out.println("Invalid car number");
+				}
+			} else {
+				System.out.println("No offer made");
+			}
 			System.out.println();
 			break;
 		case "3":
 //view my cars
+			System.out.println();
 			pms.viewPayments(current);
+			userWait();
 			break;
 		case "4":
 //view my payments
 			if(paymentDB.size() > 0) {
 				System.out.println();
+				pms.viewPayments(current);
 				System.out.println("Provide car number you want to see your payment for:");
 				String payNumStr = scan.nextLine();
-				payNumStr = payNumStr.replaceAll("\\D", "");
-				int payNum = Integer.parseInt(payNumStr);
-				pms.getCarPayments(payNum-1, current);
+				if(!"".equals(payNumStr)) {
+					int payNum = stringToInteger(payNumStr);
+					if(payNum > 0 && payNum <= carDB.size()) {
+						pms.getCarPayments(payNum-1, current);
+					} else {
+						System.out.println("Invalid car number provided");
+					}
+				} else {
+					System.out.println("Valid number not provided");
+				}
 			} else {
 				System.out.println("No payment exists");
 			}
+			System.out.println();
 			break;
 		case "6":
 			System.out.println();

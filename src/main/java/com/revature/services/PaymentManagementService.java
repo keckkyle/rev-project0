@@ -28,11 +28,16 @@ public class PaymentManagementService {
 	
 	public void viewPayments(User user) {
 		String uString = user.getUsername();
+		int count = 0;
 		for(Payment p: paymentDB) {
 			String pString = p.getCustomer().getUsername();
 			if(pString.equals(uString)) {
 				System.out.println("[" + (paymentDB.indexOf(p) + 1) + "] " + p.toString());
+				count += 1;
 			}
+		}
+		if(count == 0){
+			System.out.println("No cars found");
 		}
 	}
 	

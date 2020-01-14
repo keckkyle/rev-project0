@@ -289,3 +289,13 @@
 2020-01-14 10:19:21 DEBUG root:19 - Used 2005 Silver Zirconium Stratum
 2020-01-14 10:19:22 DEBUG root:19 - Used 2005 Silver Zirconium Stratum
 2020-01-14 10:19:22 DEBUG root:19 - Used 2005 Silver Zirconium Stratum
+2020-01-14 13:32:08 DEBUG root:19 - 
+2020-01-14 13:33:01 DEBUG root:19 - 
+2020-01-14 13:35:19 DEBUG root:19 - ""
+2020-01-14 13:36:28 DEBUG root:19 - CarNumStr != '' evalutates totrue
+2020-01-14 13:37:26 DEBUG root:19 - CarNumStr == '' evalutates to false
+2020-01-14 13:39:10 DEBUG root:19 - CarNumStr == '' evalutates to false
+2020-01-14 13:39:10 DEBUG root:19 - this runs
+2020-01-14 13:39:41 DEBUG root:19 - CarNumStr == '' evalutates to false
+2020-01-14 13:41:44 DEBUG root:19 - ''.equals(carNumStr) evalutates to true
+2020-01-14 13:41:44 DEBUG root:19 - this runs

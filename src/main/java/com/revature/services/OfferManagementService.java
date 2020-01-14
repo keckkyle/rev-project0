@@ -34,16 +34,20 @@ public class OfferManagementService {
 	}
 	
 	public void makeOffer(User customer, Car car) {
-		System.out.println("["+car.toString()+"]");
+		System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
 		System.out.println("What is your offer on this car?");
 		String price = scan.nextLine();
 		price = price.replaceAll("\\D", "");
-		int amount = Integer.parseInt(price);
+		if(!"".equals(price)) {
+			int amount = Integer.parseInt(price);
 		
-		Offer offer = new Offer(customer, amount, car);
-		offerDB.add(offer);
+			Offer offer = new Offer(customer, amount, car);
+			offerDB.add(offer);
 		
-		lot.setOffers(offerDB);
+			lot.setOffers(offerDB);
+		} else {
+			System.out.println("Invalid offer made");
+		}
 	}
 	
 	public void acceptOffer(Offer o) {

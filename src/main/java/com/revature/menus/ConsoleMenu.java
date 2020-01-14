@@ -1,19 +1,15 @@
 package com.revature.menus;
 
-import java.util.Scanner;
-
 import com.revature.pojos.Employee;
 import com.revature.pojos.User;
 
 public class ConsoleMenu extends Menu {
-	
-	private static Scanner scan = new Scanner(System.in);
 
 	public ConsoleMenu() {
 		super();
 	}
 
-	public void menuOptions() {
+	public static void menuOptions() {
 		String option = " ";
 		
 		do {
@@ -31,12 +27,10 @@ public class ConsoleMenu extends Menu {
 	private static void performUserSelection(String option) {
 		switch (option) {
 		case "1":
-			System.out.println();
 			current = uls.createNewUser();
 			selectUserMenu(current);
 			break;
 		case "2":
-			System.out.println();
 			current = uls.authenticateUser();
 			if(current != null) {
 				selectUserMenu(current);
@@ -46,7 +40,7 @@ public class ConsoleMenu extends Menu {
 			System.out.println("Admin Login");
 			break;
 		case "4":
-			System.out.println("Exit Program");
+			System.out.println("Goodbye");
 			break;
 		default:
 			System.out.println("Invalid input");
