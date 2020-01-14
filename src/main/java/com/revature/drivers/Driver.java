@@ -13,11 +13,11 @@ import com.revature.services.CarManagementService;
 import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
-//import com.revature.util.LoggerUtil;
+import com.revature.util.LoggerUtil;
 
 public class Driver {
 	
-//	private static LoggerUtil log = new LoggerUtil();
+	private static LoggerUtil log = new LoggerUtil();
 	
 	private static Scanner scan = new Scanner(System.in);
 	private static Lot myLot;
@@ -202,16 +202,19 @@ public class Driver {
 			break;
 		case "4":
 //view my payments
-			System.out.println();
-			System.out.println("Provide car number you want to see your payment for:");
-			String payNumStr = scan.nextLine();
-			payNumStr = payNumStr.replaceAll("\\D", "");
-			int payNum = Integer.parseInt(payNumStr);
-			pms.getCarPayments(payNum-1, current);
-			System.out.println();
+			if(paymentDB.size() > 0) {
+				System.out.println();
+				System.out.println("Provide car number you want to see your payment for:");
+				String payNumStr = scan.nextLine();
+				payNumStr = payNumStr.replaceAll("\\D", "");
+				int payNum = Integer.parseInt(payNumStr);
+				pms.getCarPayments(payNum-1, current);
+			} else {
+				System.out.println("No payment exists");
+			}
 			break;
 		case "6":
-			System.out.println("Exit");
+			System.out.println();
 			break;
 		default:
 			System.out.println("Invalid input");

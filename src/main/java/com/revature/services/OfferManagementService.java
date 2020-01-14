@@ -8,8 +8,11 @@ import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
 import com.revature.pojos.User;
+import com.revature.util.LoggerUtil;
 
 public class OfferManagementService {
+	
+	private static LoggerUtil log = new LoggerUtil();
 	
 	private static Scanner scan = new Scanner(System.in);
 	
@@ -54,11 +57,14 @@ public class OfferManagementService {
 			Payment payment = new Payment(car, amount, customer);
 			paymentDB.add(payment);
 			
-			lot.setOffers(offerDB);
+			offerDB.remove(index);
+			
+			lot.setPayments(paymentDB);
 		}
 		
-		for(int i = 0; i < offerDB.size(); i++) {
-			if(offerDB.get(i).getCar().toString().equals(o.getCar().toString())) {
+		for(int i = offerDB.size() - 1; i > 0; i--) {
+			if(o.getCar().toString().equals(offerDB.get(i).getCar().toString())) {
+				log.debug(offerDB.get(i).getCar().toString());
 				offerDB.remove(i);
 			}
 			lot.setOffers(offerDB);
