@@ -35,7 +35,7 @@ public class OfferDAOSerialization implements ArrayDAO<Offer> {
 		
 		try (FileInputStream fis = new FileInputStream(filename);
 				ObjectInputStream ois = new ObjectInputStream(fis);){
-			ret = (ArrayList) ois.readObject();
+			ret = (ArrayList<Offer>) ois.readObject();
 		} catch (FileNotFoundException e) {
 			log.debug(e.getMessage());
 		} catch (IOException e) {

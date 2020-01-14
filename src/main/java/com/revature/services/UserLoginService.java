@@ -3,23 +3,22 @@ package com.revature.services;
 import java.util.List;
 import java.util.Scanner;
 
-import com.revature.dao.ArrayDAO;
-import com.revature.dao.UserDAOSerialization;
 import com.revature.pojos.Customer;
+import com.revature.pojos.Lot;
 import com.revature.pojos.User;
 //import com.revature.util.LoggerUtil;
 
 public class UserLoginService {
 	
 //	private static LoggerUtil log = new LoggerUtil();
+	private static Lot lot;
 	private static List<User> userDB;
 	private static Scanner scan = new Scanner(System.in);
 	
-	private ArrayDAO<User> uDao = new UserDAOSerialization();
-	
-	public UserLoginService() {
+	public UserLoginService(Lot l) {
 		super();
-		userDB = uDao.readArray("Test_Files/testUsers");
+		lot = l;
+		userDB = l.getUsers();
 	}
 	
 	public User createNewUser() {
@@ -42,7 +41,7 @@ public class UserLoginService {
 		User newUser = new Customer(name, username, password);
 		userDB.add(newUser);
 		
-		uDao.createArray(userDB, "Test_Files/testUsers");
+		lot.setUsers(userDB);
 		
 		return newUser;
 	}

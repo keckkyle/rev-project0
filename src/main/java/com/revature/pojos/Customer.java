@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Customer extends User implements Serializable {
+	private static final long serialVersionUID = -624369238766946549L;
 	
 	private List<Car> userCars = new ArrayList<Car>();
 	private List<Payment> payments = new ArrayList<Payment>();

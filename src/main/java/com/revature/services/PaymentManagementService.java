@@ -1,28 +1,38 @@
 package com.revature.services;
 
 import java.util.List;
-import com.revature.dao.ArrayDAO;
-import com.revature.dao.PaymentDAOSerialization;
 import com.revature.pojos.Car;
+import com.revature.pojos.Lot;
 import com.revature.pojos.Payment;
+import com.revature.pojos.User;
 
 public class PaymentManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
+//	private static Lot lot;
 	
-//	private static Scanner scan = new Scanner(System.in);
 	private static List<Payment> paymentDB;
-	
-	private static ArrayDAO<Payment> pDao = new PaymentDAOSerialization();
 
-	public PaymentManagementService() {
+	public PaymentManagementService(Lot l) {
 		super();
-		paymentDB = pDao.readArray("Test_Files/testPayments");
+//		lot = l;
+		paymentDB = l.getPayments();
 	}
 
 	public void viewPayments(){
 		for(Payment p: paymentDB) {
-			
-			System.out.println("[" + (paymentDB.indexOf(p) + 1) + "] " + p.toString());
+			String car = p.getCar().getMake() + " "+ p.getCar().getModel();
+			String pString = p.getCustomer().getUsername() + " owes $"+ p.getRemainingBalance() + " on " + car;
+			System.out.println("[" + (paymentDB.indexOf(p) + 1) + "] " + pString);
+		}
+	}
+	
+	public void viewPayments(User user) {
+		String uString = user.getUsername();
+		for(Payment p: paymentDB) {
+			String pString = p.getCustomer().getUsername();
+			if(pString.equals(uString)) {
+				System.out.println("[" + (paymentDB.indexOf(p) + 1) + "] " + p.toString());
+			}
 		}
 	}
 	
@@ -32,6 +42,18 @@ public class PaymentManagementService {
 			int length = paymentDB.get(index).getPaymentLength();
 			int monthly = paymentDB.get(index).getMonthlyPayment();
 			System.out.println("[" + paymentDB.get(index).getCar().toString() + "]");
+			System.out.println("You have " + length + " payments of $" + monthly + " remaining.");
+		}
+	}
+	
+	public void getCarPayments(int i, User u) {
+		User payUser = paymentDB.get(i).getCustomer();
+		if( i < 0 || i >= paymentDB.size() || !u.getUsername().equals(payUser.getUsername()) ) {
+			System.out.println("Invalid selection");
+		} else {
+			int length = paymentDB.get(i).getPaymentLength();
+			int monthly = paymentDB.get(i).getMonthlyPayment();
+			System.out.println("[" + paymentDB.get(i).getCar().toString() + "]");
 			System.out.println("You have " + length + " payments of $" + monthly + " remaining.");
 		}
 	}

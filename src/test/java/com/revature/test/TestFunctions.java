@@ -2,7 +2,6 @@ package com.revature.test;
 
 import static org.junit.Assert.*;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import org.junit.Test;
@@ -15,15 +14,10 @@ import com.revature.services.CarManagementService;
 import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
-import com.revature.dao.ArrayDAO;
-import com.revature.dao.CarDAOSerialization;
-import com.revature.dao.LotDAO;
-import com.revature.dao.OfferDAOSerialization;
-import com.revature.dao.PaymentDAOSerialization;
-import com.revature.dao.UserDAOSerialization;
+import com.revature.util.LoggerUtil;
+
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
-import com.revature.pojos.Employee;
 import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
@@ -31,32 +25,54 @@ import com.revature.pojos.User;
 
 public class TestFunctions {
 	
-	private UserLoginService uls = new UserLoginService();
-	private CarManagementService cms = new CarManagementService();
-	private PaymentManagementService pms = new PaymentManagementService();
-	private OfferManagementService oms = new OfferManagementService();
+	private static LoggerUtil log = new LoggerUtil();
 	
-	private ArrayDAO<User> uDao = new UserDAOSerialization();
-	private ArrayDAO<Car> cDao = new CarDAOSerialization();
-	private ArrayDAO<Offer> oDao = new OfferDAOSerialization();
-	private ArrayDAO<Payment> pDao = new PaymentDAOSerialization();
+	private static CarManagementService cms;
+	private static UserLoginService uls;
+	private static OfferManagementService oms;
+	private static PaymentManagementService pms;
 	
-	private User user1 = new Customer("Kyle", "Kyle", "Kyle");
-	private User user2 = new Customer("Bob", "Bob", "Bob");
-	private User user3 = new Employee("John", "John", "John");
-	private Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
-	private Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, "2005", "167043", 6500);
-	private Lot lot = new Lot("Test Files");
+	private static List<Car> cars;
+	private static List<User> users;
+	private static List<Offer> offers;
+	private static List<Payment> payments;
 	
-	private List<Car> cars = new ArrayList<>();
-	private List<Offer> offers = new ArrayList<>();
-	private List<Payment> payments = new ArrayList<>();
-	private List<User> users = new ArrayList<>();
+	private static Lot lot = new Lot("Test Lot");
+	private static User cust1 = new Customer("Kyle", "Kyle", "1234");
+	private static User cust2 = new Customer("Hannah", "Hannah", "1234");
+//	private static User emp1 = new Employee("Jake", "Jake", "1234");
+//	private static User emp2 = new Employee("Kate", "Kate", "1234");
+	private static Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
+	private static Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, "2005", "167043", 6500);
+	private static Offer offer1 = new Offer(cust1, 43500, car2);
+	private static Offer offer2 = new Offer(cust2, 10500, car1);
 	
-	private static LotDAO lotDao = new LotDAO();
-
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
+
+		cms = new CarManagementService(lot);
+		uls = new UserLoginService(lot);
+		oms = new OfferManagementService(lot);
+		pms = new PaymentManagementService(lot);
+		
+		cars = lot.getCars();
+		users = lot.getUsers();
+		offers = lot.getOffers();
+		payments = lot.getPayments();
+		
+//		users.add(emp1);
+//		users.add(emp2);
+//		users.add(cust1);
+//		users.add(cust2);
+//		cars.add(car1);
+//		cars.add(car2);
+//		payments.add(new Payment(car2,44000,cust2));
+//		payments.add(new Payment(car1,10500,cust1));
+//		offers.add(new Offer(cust1, 43500, car2));
+//		offers.add(new Offer(cust2, 41000, car2));
+//		offers.add(new Offer(cust1, 11750, car1));
+//		offers.add(new Offer(cust2, 10500, car1));
+
 	}
 
 	@AfterClass
@@ -64,19 +80,7 @@ public class TestFunctions {
 	}
 
 	@Before
-	public void setUp() throws Exception {
-		lotDao.createLotDirectory(lot);
-		
-		users.add(user1);
-		users.add(user2);
-		users.add(user3);
-		cars.add(car1);
-		cars.add(car2);
-		offers.add(new Offer(user1, 15024));
-		offers.add(new Offer(user2, 16100));
-		payments.add(new Payment(car1, 15024));
-		payments.add(new Payment(car2, 16100));
-		
+	public void setUp() throws Exception {	
 	}
 
 	@After
@@ -88,7 +92,6 @@ public class TestFunctions {
 	@Test
 	public void testIfUserCreated() {
 		User newUser = uls.createNewUser();
-		lot.setUsers(uDao.readArray("Test_Files/testUsers"));
 		User recent = lot.getUsers().get(lot.getUsers().size()-1);
 		assertEquals(recent.toString(), newUser.toString());
 	}
@@ -102,9 +105,9 @@ public class TestFunctions {
 	
 	@Test
 	public void testUserArrayFile() {
-//		uDao.createArray(users, "Test_Files/testUsers");
+//		lot.setUsers(users);
 		
-		List<User> deserialized = uDao.readArray("Test_Files/testUsers");
+		List<User> deserialized = lot.getUsers();
 		
 		assertEquals(users.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(users.get(1).toString(), deserialized.get(1).toString());
@@ -113,9 +116,9 @@ public class TestFunctions {
 	
 	@Test
 	public void testCarArrayFile() {
-//		cDao.createArray(cars, "Test_Files/testOffers");
+//		lot.setCars(cars);
 		
-		List<Car> deserialized = cDao.readArray("Test_Files/testCars");
+		List<Car> deserialized = lot.getCars();
 		
 		assertEquals(cars.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(cars.get(1).toString(), deserialized.get(1).toString());
@@ -123,9 +126,9 @@ public class TestFunctions {
 
 	@Test
 	public void testOfferArrayFile() {
-//		oDao.createArray(offers, "Test_Files/testOffers");
+//		lot.setOffers(offers);
 		
-		List<Offer> deserialized = oDao.readArray("Test_Files/testOffers");
+		List<Offer> deserialized = lot.getOffers();
 		
 		assertEquals(offers.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(offers.get(1).toString(), deserialized.get(1).toString());
@@ -133,9 +136,9 @@ public class TestFunctions {
 	
 	@Test
 	public void testPaymentArrayFile() {
-		pDao.createArray(payments, "Test_Files/testPayments");
+//		lot.setPayments(payments);
 		
-		List<Payment> deserialized = pDao.readArray("Test_Files/testPayments");
+		List<Payment> deserialized = lot.getPayments();
 		
 		assertEquals(payments.get(0).toString(), deserialized.get(0).toString());
 		assertEquals(payments.get(1).toString(), deserialized.get(1).toString());
@@ -143,34 +146,34 @@ public class TestFunctions {
 	
 	@Test 
 	public void viewCarsOnLot() {
-		System.out.println("Test viewCars():");
+		log.debug("Test viewCars():");
 		cms.viewCars();
 	}
 	
 	@Test
 	public void addCarToLot() {
-		List<Car> before = cDao.readArray("Test_Files/testCars");
-		
+		cms.viewCars();
 		cms.addCar();
-		
-		List<Car> after = cDao.readArray("Test_Files/testCars");
-		assertEquals(before.size()+1, after.size());
+		cms.viewCars();
 	}
 	
-	@Test
-	public void removeCarFromLot() {
-		List<Car> before = cDao.readArray("Test_Files/testCars");
-		
-		cms.removeCar(car1);
-		
-		List<Car> after = cDao.readArray("Test_Files/testCars");
-		assertEquals(before.size()-1, after.size());
+//	@Test
+//	public void removeCarFromLot() {
+//		cms.viewCars();
+//		cms.removeCar(car1);
+//		cms.viewCars();
+//	}
+	
+	@Test 
+	public void viewAllUserPayments() {
+		log.debug("Test viewPaymets():");
+		pms.viewPayments();
 	}
 	
 	@Test 
 	public void viewUserPayments() {
-		System.out.println("Test viewPaymets():");
-		pms.viewPayments();
+		log.debug("Test viewPaymets(cust):");
+		pms.viewPayments(cust1);
 	}
 	
 	@Test
@@ -186,11 +189,29 @@ public class TestFunctions {
 	
 	@Test
 	public void makeNewOffer() {
-		List<Offer> before = oDao.readArray("Test_Files/testOffers");
-		
-		oms.makeOffer(user2);
-		
-		List<Offer> after = oDao.readArray("Test_Files/testOffers");
-		assertEquals(before.size()+1, after.size());
+		oms.viewOffers();
+		oms.makeOffer(cust2, car1);
+		oms.viewOffers();
 	}
+	
+	@Test
+	public void rejectUserOffer() {
+		oms.viewOffers();
+		oms.rejectOffer(offer1);
+		oms.viewOffers();
+	}
+	
+	@Test
+	public void acceptUserOffer() {
+		log.debug("Offers before");
+		oms.viewOffers();
+		log.debug("Payments before");
+		pms.viewPayments();
+		oms.acceptOffer(offer2);
+		log.debug("Offers after");
+		oms.viewOffers();
+		log.debug("Payments after");
+		pms.viewPayments();
+	}
+	
 }

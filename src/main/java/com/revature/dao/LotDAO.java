@@ -3,11 +3,11 @@ package com.revature.dao;
 import java.io.File;
 
 import com.revature.pojos.Lot;
-import com.revature.util.LoggerUtil;
+//import com.revature.util.LoggerUtil;
 
 public class LotDAO {
 	
-	private static LoggerUtil log = new LoggerUtil();
+//	private static LoggerUtil log = new LoggerUtil();
 	
 	public void createLotDirectory(Lot l) {
 		String path = System.getProperty("user.dir");

@@ -3,18 +3,17 @@ package com.revature.pojos;
 import java.io.Serializable;
 
 public class Offer implements Serializable {
+	private static final long serialVersionUID = -6666306052535321535L;
 	
 	private User customer;
+	private Car car;
 	private int amount;
 	
-	public Offer() {
-		super();
-	}
-	
-	public Offer(User customer, int amount) {
+	public Offer(User customer, int amount, Car car) {
 		super();
 		this.customer = customer;
 		this.amount = amount;
+		this.car = car;
 	}
 
 	public User getCustomer() {
@@ -33,9 +32,17 @@ public class Offer implements Serializable {
 		this.amount = amount;
 	}
 
+	public Car getCar() {
+		return car;
+	}
+
+	public void setCar(Car car) {
+		this.car = car;
+	}
+
 	@Override
 	public String toString() {
-		return customer.toString() + " offers $" + amount;
+		return customer.getUsername() + " offers $" + amount + " for " + car.toString();
 	}
 	
 	

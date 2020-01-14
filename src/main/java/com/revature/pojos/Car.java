@@ -6,6 +6,8 @@ import java.util.List;
 
 public class Car implements Serializable {
 
+	private static final long serialVersionUID = 4178172927577311763L;
+	
 	private String vin;
 	private String make;
 	private String model;
@@ -37,7 +39,7 @@ public class Car implements Serializable {
 	}
 	
 	public void setVin(String vin) {
-		this.vin = vin;
+		this.vin = vin.toUpperCase();
 	}
 	
 	public String getMake() {
@@ -112,5 +114,4 @@ public class Car implements Serializable {
 		} 
 		return "Used " + carDetails;
 	}
-	
 }

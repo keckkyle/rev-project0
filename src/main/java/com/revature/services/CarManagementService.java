@@ -3,22 +3,21 @@ package com.revature.services;
 import java.util.List;
 import java.util.Scanner;
 
-import com.revature.dao.ArrayDAO;
-import com.revature.dao.CarDAOSerialization;
 import com.revature.pojos.Car;
+import com.revature.pojos.Lot;
 //import com.revature.util.LoggerUtil;
 
 public class CarManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
 	
-	private static Scanner scan = new Scanner(System.in);
+	private static Lot lot;
 	private static List<Car> carDB;
-	
-	private static ArrayDAO<Car> cDao = new CarDAOSerialization();
+	private static Scanner scan = new Scanner(System.in);
 
-	public CarManagementService() {
+	public CarManagementService(Lot l) {
 		super();
-		carDB = cDao.readArray("Test_Files/testCars");
+		lot = l;
+		carDB = l.getCars();
 	}
 
 	public void viewCars(){
@@ -36,6 +35,7 @@ public class CarManagementService {
 		String newCar = scan.nextLine().toLowerCase();
 		System.out.println("Add car VIN:");
 		String vin = scan.nextLine();
+		vin = vin.toUpperCase();
 		System.out.println("Add car make:");
 		String make = scan.nextLine();
 		System.out.println("Add car model:");
@@ -60,18 +60,20 @@ public class CarManagementService {
 		
 		Car car = new Car(vin, make, model, color, isNew, year, mileage, price);
 		carDB.add(car);
-		cDao.createArray(carDB, "Test_Files/testCars");
+		lot.setCars(carDB);
 	}
 	
 	public void removeCar(Car car) {
 		int index = getCarIndex(car);
 		carDB.remove(index);
-		cDao.createArray(carDB, "Test_Files/testCars");
+		lot.setCars(carDB);
 	}
 	
 	public int getCarIndex(Car car) {
+		String checkCar = car.getVin() + car.getMake();
 		for(int i = 0; i < carDB.size(); i++) {
-			if(car.getVin().equals(carDB.get(i).getVin())) {
+			String carI = carDB.get(i).getVin() + carDB.get(i).getMake();
+			if(checkCar.equals(carI)) {
 				return i;
 			}
 		}

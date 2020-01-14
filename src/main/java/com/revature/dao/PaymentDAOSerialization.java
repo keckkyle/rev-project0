@@ -35,7 +35,7 @@ public class PaymentDAOSerialization implements ArrayDAO<Payment> {
 		
 		try (FileInputStream fis = new FileInputStream(filename);
 				ObjectInputStream ois = new ObjectInputStream(fis);){
-			ret = (ArrayList) ois.readObject();
+			ret = (ArrayList<Payment>) ois.readObject();
 		} catch (FileNotFoundException e) {
 			log.debug(e.getMessage());
 		} catch (IOException e) {

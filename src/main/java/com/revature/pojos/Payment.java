@@ -3,20 +3,19 @@ package com.revature.pojos;
 import java.io.Serializable;
 
 public class Payment implements Serializable {
+	private static final long serialVersionUID = 1L;
 	
 	private Car car;
+	private User customer;
 	private int purchasePrice;
 	private int paymentLength = 60;
 	private int remainingBalance;
 	private int monthlyPayment;
 	
-	public Payment() {
-		super();
-	}
-	
-	public Payment(Car car, int amount) {
+	public Payment(Car car, int amount, User customer) {
 		super();
 		this.car = car;
+		this.customer = customer;
 		this.purchasePrice = amount;
 		this.remainingBalance = amount;
 		this.monthlyPayment = calcMonthly();
@@ -32,6 +31,14 @@ public class Payment implements Serializable {
 
 	public void setCar(Car car) {
 		this.car = car;
+	}
+
+	public User getCustomer() {
+		return customer;
+	}
+
+	public void setCustomer(User customer) {
+		this.customer = customer;
 	}
 
 	public int getPurchasePrice() {
@@ -50,17 +57,12 @@ public class Payment implements Serializable {
 		this.remainingBalance = remainingBalance;
 	}
 	
-
 	public int getPaymentLength() {
 		return paymentLength;
 	}
 
 	public int getMonthlyPayment() {
 		return monthlyPayment;
-	}
-
-	public void setMonthlyPayment(int monthlyPayment) {
-		this.monthlyPayment = monthlyPayment;
 	}
 
 	@Override
