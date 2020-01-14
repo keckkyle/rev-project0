@@ -64,7 +64,7 @@ public class CustomerMenu extends Menu {
 				String payNumStr = scan.nextLine();
 				if(!"".equals(payNumStr)) {
 					int payNum = stringToInteger(payNumStr);
-					if(payNum > 0 && payNum <= carDB.size()) {
+					if(payNum > 0 && payNum <= paymentDB.size()) {
 						pms.getCarPayments(payNum-1, current);
 					} else {
 						System.out.println("Invalid car number provided");

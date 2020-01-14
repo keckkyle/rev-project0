@@ -2,6 +2,8 @@ package com.revature.services;
 
 import java.util.List;
 import java.util.Scanner;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
 
 import com.revature.pojos.Car;
 import com.revature.pojos.Lot;
@@ -35,19 +37,20 @@ public class OfferManagementService {
 	
 	public void makeOffer(User customer, Car car) {
 		System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
-		System.out.println("What is your offer on this car?");
+		System.out.println("What is your offer on this car? (Do not include $ . or , in your input)");
 		String price = scan.nextLine();
-		price = price.replaceAll("\\D", "");
-		if(!"".equals(price)) {
-			int amount = Integer.parseInt(price);
-		
-			Offer offer = new Offer(customer, amount, car);
-			offerDB.add(offer);
-		
-			lot.setOffers(offerDB);
-		} else {
-			System.out.println("Invalid offer made");
+		Pattern regex = Pattern.compile("[^0-9]");
+		Matcher match = regex.matcher(price);
+		if(match.find()) {
+			price = "0";
 		}
+		price = price.replaceAll("\\D", "");
+		int amount = Integer.parseInt(price);
+		
+		Offer offer = new Offer(customer, amount, car);
+		offerDB.add(offer);
+		
+		lot.setOffers(offerDB);
 	}
 	
 	public void acceptOffer(Offer o) {

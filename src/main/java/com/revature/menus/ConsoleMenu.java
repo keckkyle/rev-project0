@@ -37,7 +37,8 @@ public class ConsoleMenu extends Menu {
 			}
 			break;
 		case "3":
-			System.out.println("Admin Login");
+			System.out.println("Access denied");
+			System.out.println();
 			break;
 		case "4":
 			System.out.println("Goodbye");
