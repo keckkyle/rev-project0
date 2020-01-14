@@ -19,6 +19,7 @@ public class OfferManagementService {
 	private static Scanner scan = new Scanner(System.in);
 	
 	private static Lot lot;
+	private static List<Car> carDB;
 	private static List<Offer> offerDB;
 	private static List<Payment> paymentDB;
 	
@@ -27,6 +28,7 @@ public class OfferManagementService {
 		lot = l;
 		offerDB = l.getOffers();
 		paymentDB = l.getPayments();
+		carDB = l.getCars();
 	}
 	
 	public void viewOffers() {
@@ -39,18 +41,17 @@ public class OfferManagementService {
 		System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
 		System.out.println("What is your offer on this car? (Do not include $ . or , in your input)");
 		String price = scan.nextLine();
-		Pattern regex = Pattern.compile("[^0-9]");
-		Matcher match = regex.matcher(price);
-		if(match.find()) {
-			price = "0";
+		if(!"".equals(price)) {
+			price = price.replaceAll("\\D", "");
+			int amount = Integer.parseInt(price);
+		
+			Offer offer = new Offer(customer, amount, car);
+			offerDB.add(offer);
+		
+			lot.setOffers(offerDB);
+		} else {
+			System.out.println("Invalid offer");
 		}
-		price = price.replaceAll("\\D", "");
-		int amount = Integer.parseInt(price);
-		
-		Offer offer = new Offer(customer, amount, car);
-		offerDB.add(offer);
-		
-		lot.setOffers(offerDB);
 	}
 	
 	public void acceptOffer(Offer o) {
@@ -71,10 +72,16 @@ public class OfferManagementService {
 		
 		for(int i = offerDB.size() - 1; i > 0; i--) {
 			if(o.getCar().toString().equals(offerDB.get(i).getCar().toString())) {
-				log.debug(offerDB.get(i).getCar().toString());
 				offerDB.remove(i);
 			}
 			lot.setOffers(offerDB);
+		}
+		
+		for(int j = carDB.size() - 1; j > 0; j--) {
+			if(o.getCar().getVin().equals(carDB.get(j).getVin())){
+				carDB.remove(j);
+			}
+			lot.setCars(carDB);
 		}
 	}
 	

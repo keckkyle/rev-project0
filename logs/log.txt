@@ -300,3 +300,5 @@
 2020-01-14 13:41:44 DEBUG root:19 - ''.equals(carNumStr) evalutates to true
 2020-01-14 13:41:44 DEBUG root:19 - this runs
 2020-01-14 15:30:15 DEBUG root:19 - 3r4
+2020-01-14 16:01:58 DEBUG root:19 - Used 2010 Cocoa Chevrolet Malibu
+2020-01-14 16:01:58 DEBUG root:19 - Used 2010 Cocoa Chevrolet Malibu
