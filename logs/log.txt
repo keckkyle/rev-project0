@@ -302,3 +302,14 @@
 2020-01-14 15:30:15 DEBUG root:19 - 3r4
 2020-01-14 16:01:58 DEBUG root:19 - Used 2010 Cocoa Chevrolet Malibu
 2020-01-14 16:01:58 DEBUG root:19 - Used 2010 Cocoa Chevrolet Malibu
+2020-01-18 21:32:54 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-18 21:32:54 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-18 21:32:54 DEBUG root:19 - No suitable driver found for jdbc:postgresql://project0.cpcocwvrvmiz.us-east-1.rds.amazonaws.com:5432/postgres?
+2020-01-18 21:38:51 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-18 21:38:51 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-18 21:38:51 DEBUG root:19 - No suitable driver found for jdbc:postgresql://project0.cpcocwvrvmiz.us-east-1.rds.amazonaws.com:5432/postgres?
+2020-01-18 21:40:29 DEBUG root:19 - No suitable driver found for jdbc:postgresql://project0.cpcocwvrvmiz.us-east-1.rds.amazonaws.com:5432/postgres?
+2020-01-18 21:46:05 DEBUG root:19 - FATAL: password authentication failed for user "postres"
+2020-01-18 21:49:08 DEBUG root:19 - FATAL: password authentication failed for user "postres"
+2020-01-18 21:52:00 DEBUG root:19 - FATAL: password authentication failed for user "postres"
+2020-01-18 21:52:24 DEBUG root:19 - FATAL: password authentication failed for user "postres"

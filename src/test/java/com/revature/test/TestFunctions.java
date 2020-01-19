@@ -2,6 +2,8 @@ package com.revature.test;
 
 import static org.junit.Assert.*;
 
+import java.sql.Connection;
+import java.sql.SQLException;
 import java.util.List;
 
 import org.junit.Test;
@@ -14,6 +16,7 @@ import com.revature.services.CarManagementService;
 import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
+import com.revature.util.ConnectionFactory;
 import com.revature.util.LoggerUtil;
 
 import com.revature.pojos.Car;
@@ -213,5 +216,5 @@ public class TestFunctions {
 		log.debug("Payments after");
 		pms.viewPayments();
 	}
-	
+
 }
