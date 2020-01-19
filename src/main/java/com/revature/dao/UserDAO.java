@@ -12,7 +12,7 @@ public interface UserDAO {
 	
 	public void updateUser(User user, int id);
 	
-	public void deleteUser(User car);
+	public void deleteUser(User user);
 	
 	public List<User> readAllUsers();
 	
