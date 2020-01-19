@@ -2,19 +2,16 @@ package com.revature.services;
 
 import java.util.List;
 import java.util.Scanner;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
-
 import com.revature.pojos.Car;
 import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
 import com.revature.pojos.User;
-import com.revature.util.LoggerUtil;
+//import com.revature.util.LoggerUtil;
 
 public class OfferManagementService {
 	
-	private static LoggerUtil log = new LoggerUtil();
+//	private static LoggerUtil log = new LoggerUtil();
 	
 	private static Scanner scan = new Scanner(System.in);
 	

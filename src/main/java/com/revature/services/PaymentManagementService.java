@@ -1,6 +1,8 @@
 package com.revature.services;
 
 import java.util.List;
+
+import com.revature.menus.Menu;
 import com.revature.pojos.Car;
 import com.revature.pojos.Lot;
 import com.revature.pojos.Payment;
@@ -60,6 +62,7 @@ public class PaymentManagementService {
 			int monthly = paymentDB.get(i).getMonthlyPayment();
 			System.out.println("[" + paymentDB.get(i).getCar().toString() + "]");
 			System.out.println("You have " + length + " payments of $" + monthly + " remaining.");
+			Menu.userWait();
 		}
 	}
 	

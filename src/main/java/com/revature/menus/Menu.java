@@ -26,7 +26,7 @@ public class Menu {
 	protected static List<Offer> offerDB = Driver.myLot.getOffers();
 	protected static List<Payment> paymentDB = Driver.myLot.getPayments();
 	
-	protected static void userWait() {
+	public static void userWait() {
 		System.out.println("=== Press Enter to return to menu ===");
 		scan.nextLine();
 	}
