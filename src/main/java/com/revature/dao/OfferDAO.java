@@ -2,7 +2,9 @@ package com.revature.dao;
 
 import java.util.List;
 
+import com.revature.pojos.Car;
 import com.revature.pojos.Offer;
+import com.revature.pojos.User;
 
 public interface OfferDAO {
 	
@@ -10,11 +12,13 @@ public interface OfferDAO {
 	
 	public Offer readOffer(int carId, int userID);
 	
-	public void updateOffer(Offer offer, int userId, int carId);
+	public void updateOffer(Offer offer);
 	
 	public void deleteOffer(Offer offer);
 	
 	public List<Offer> readAllOffers();
 	
-	public List<Offer> readOffersByUserId(int id);
+	public List<Offer> readOffersByUser(User user);
+	
+	public List<Offer> readOffersByCar(Car car);
 }

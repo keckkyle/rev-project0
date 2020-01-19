@@ -16,6 +16,7 @@ import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.util.LoggerUtil;
 import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.OfferDAOPostgres;
 import com.revature.dao.UserDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
@@ -46,8 +47,8 @@ public class TestFunctions {
 //	private static User emp2 = new Employee("Kate", "Kate", "1234");
 	private static Car car1 = new Car("Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
 	private static Car car2 = new Car("Ford", "Focus", "Red", false, "2005", "167043", 6500);
-	private static Offer offer1 = new Offer(cust1, 43500, car2);
-	private static Offer offer2 = new Offer(cust2, 10500, car1);
+	private static Offer offer1 = new Offer(car2, cust1, 43500);
+	private static Offer offer2 = new Offer(car1, cust2, 10500);
 	
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
@@ -225,9 +226,17 @@ public class TestFunctions {
 	}
 	
 	@Test
-	public void getUsers() {
-		UserDAOPostgres uDAOp = new UserDAOPostgres();
-		uDAOp.readUser("Kyle");
-
+	public void createOffer() {
+		OfferDAOPostgres oDAOP = new OfferDAOPostgres();
+		Car car = new Car("F","Z","Pink",false,"3030","12533", 12345);
+		car.setId(1);
+		User user = new User("Kyle","Kyle","Kyle");
+		user.setId(7);
+		Offer offer = new Offer(car, user, 10987);
+		List<Offer> offers = oDAOP.readOffersByUser(user);
+		for(Offer o : offers) {
+			System.out.println(o.toString());
+		}
+		
 	}
 }

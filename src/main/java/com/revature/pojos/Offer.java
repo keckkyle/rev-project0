@@ -8,8 +8,9 @@ public class Offer implements Serializable {
 	private User customer;
 	private Car car;
 	private int amount;
+	private int status;
 	
-	public Offer(User customer, int amount, Car car) {
+	public Offer(Car car, User customer, int amount) {
 		super();
 		this.customer = customer;
 		this.amount = amount;
@@ -38,6 +39,14 @@ public class Offer implements Serializable {
 
 	public void setCar(Car car) {
 		this.car = car;
+	}
+
+	public int getStatus() {
+		return status;
+	}
+
+	public void setStatus(int status) {
+		this.status = status;
 	}
 
 	@Override

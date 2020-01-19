@@ -42,7 +42,7 @@ public class OfferManagementService {
 			price = price.replaceAll("\\D", "");
 			int amount = Integer.parseInt(price);
 		
-			Offer offer = new Offer(customer, amount, car);
+			Offer offer = new Offer(car, customer, amount);
 			offerDB.add(offer);
 		
 			lot.setOffers(offerDB);

@@ -49,8 +49,31 @@ public class CarDAOPostgres implements CarDAO {
 
 	@Override
 	public Car readCar(int id) {
-		// TODO Auto-generated method stub
-		return null;
+		String sql = "Select * from car where car_id = ?";
+		Connection conn = ConnectionFactory.getConnection();
+		
+		Car car = null;
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				car = new Car(result.getInt(1), result.getString(2), result.getString(3), result.getString(4), result.getBoolean(9), result.getString(5), result.getString(6), result.getInt(7), result.getInt(8));
+			}
+			
+		} catch (SQLException e) {
+			log.debug(e.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log.debug(e.getMessage());
+			}
+		}
+		
+		return car;
 	}
 
 	@Override

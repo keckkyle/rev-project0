@@ -71,6 +71,34 @@ public class UserDAOPostgres implements UserDAO {
 		
 		return user;
 	}
+	
+	@Override
+	public User readUser(int id) {
+		String sql = "Select * from users where user_id = ?";
+		Connection conn = ConnectionFactory.getConnection();
+		User user = null;
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, id);
+			ResultSet result = stmt.executeQuery();
+			
+			if(result.next()) {
+				user = new User(result.getInt(1), result.getString(4), result.getString(2), result.getString(3));
+			}
+			
+		} catch (SQLException e) {
+			log.debug(e.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log.debug(e.getMessage());
+			}
+		}
+		
+		return user;
+	}
 
 	@Override
 	public void updateUser(User user) {
