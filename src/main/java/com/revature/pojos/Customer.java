@@ -13,6 +13,12 @@ public class Customer extends User implements Serializable {
 	public Customer(String name, String username, String password) {
 		super(name, username, password);
 	}
+	
+	public Customer(int id, String name, String username, String password) {
+		super(id, name, username, password);
+	}
+
+
 
 	public List<Car> getUserCars() {
 		return userCars;

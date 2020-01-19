@@ -16,8 +16,10 @@ import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.util.LoggerUtil;
 import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.UserDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
+import com.revature.pojos.Employee;
 import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
@@ -223,10 +225,9 @@ public class TestFunctions {
 	}
 	
 	@Test
-	public void getCars() {
-		CarDAOPostgres cDAOp = new CarDAOPostgres();
-		List<Car> cars = cDAOp.readAllCars();
-		cars.get(0).setOwnedBy(3);
-		cDAOp.updateCar(cars.get(0));
+	public void getUsers() {
+		UserDAOPostgres uDAOp = new UserDAOPostgres();
+		uDAOp.readUser("Kyle");
+
 	}
 }

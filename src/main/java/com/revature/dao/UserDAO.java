@@ -8,9 +8,9 @@ public interface UserDAO {
 	
 	public void createUser(User user);
 	
-	public User readUser(int id);
+	public User readUser(String username);
 	
-	public void updateUser(User user, int id);
+	public void updateUser(User user);
 	
 	public void deleteUser(User user);
 	

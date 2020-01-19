@@ -83,9 +83,6 @@ public class CarDAOPostgres implements CarDAO {
 				log.debug(e.getMessage());
 			}
 		}
-
-	
-
 	}
 
 	@Override
