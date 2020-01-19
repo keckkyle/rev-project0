@@ -66,11 +66,11 @@ public class Car implements Serializable {
 		this.color = color;
 	}
 	
-	public boolean isNew() {
+	public boolean getIsNew() {
 		return isNew;
 	}
 
-	public void setNew(boolean isNew) {
+	public void setIsNew(boolean isNew) {
 		this.isNew = isNew;
 	}
 

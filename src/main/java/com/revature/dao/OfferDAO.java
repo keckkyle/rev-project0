@@ -8,7 +8,7 @@ public interface OfferDAO {
 	
 	public void createOffer(Offer offer);
 	
-	public Offer readOffer(int id);
+	public Offer readOffer(int carId, int userID);
 	
 	public void updateOffer(Offer offer, int userId, int carId);
 	
