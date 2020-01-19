@@ -10,7 +10,7 @@ public interface CarDAO {
 	
 	public Car readCar(int id);
 	
-	public void updateCar(Car car, int id);
+	public void updateCar(Car car);
 	
 	public void deleteCar(Car car);
 	

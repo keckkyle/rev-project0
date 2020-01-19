@@ -67,10 +67,10 @@ public class PaymentManagementService {
 	}
 	
 	public int findCar(Car c) {
-		String carVIN = c.getVin();
+		int carVIN = c.getId();
 		for(int i = 0; i < paymentDB.size(); i++) {
-			String carI = paymentDB.get(i).getCar().getVin();
-			if(carVIN.equals(carI)) {
+			int carI = paymentDB.get(i).getCar().getId();
+			if(carVIN == carI) {
 				return i;
 			}
 		}

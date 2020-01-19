@@ -15,7 +15,7 @@ import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.util.LoggerUtil;
-
+import com.revature.dao.CarDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
 import com.revature.pojos.Lot;
@@ -42,8 +42,8 @@ public class TestFunctions {
 	private static User cust2 = new Customer("Hannah", "Hannah", "1234");
 //	private static User emp1 = new Employee("Jake", "Jake", "1234");
 //	private static User emp2 = new Employee("Kate", "Kate", "1234");
-	private static Car car1 = new Car("C5HL5", "Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
-	private static Car car2 = new Car("14HG8", "Ford", "Focus", "Red", false, "2005", "167043", 6500);
+	private static Car car1 = new Car("Cadillac", "Escalade", "Silver", true, "2020", "0", 45590);
+	private static Car car2 = new Car("Ford", "Focus", "Red", false, "2005", "167043", 6500);
 	private static Offer offer1 = new Offer(cust1, 43500, car2);
 	private static Offer offer2 = new Offer(cust2, 10500, car1);
 	
@@ -214,4 +214,19 @@ public class TestFunctions {
 		pms.viewPayments();
 	}
 
+	
+	@Test
+	public void addCar() {
+		Car car = new Car("Honda", "Civic", "Blue", false, "2016", "68593", 10595);
+		CarDAOPostgres cDAOp = new CarDAOPostgres();
+		cDAOp.createCar(car);
+	}
+	
+	@Test
+	public void getCars() {
+		CarDAOPostgres cDAOp = new CarDAOPostgres();
+		List<Car> cars = cDAOp.readAllCars();
+		cars.get(0).setOwnedBy(3);
+		cDAOp.updateCar(cars.get(0));
+	}
 }

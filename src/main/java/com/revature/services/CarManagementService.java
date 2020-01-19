@@ -58,7 +58,7 @@ public class CarManagementService {
 		priceStr = priceStr.replaceAll("\\D", "");
 		price = Integer.parseInt(priceStr);
 		
-		Car car = new Car(vin, make, model, color, isNew, year, mileage, price);
+		Car car = new Car(make, model, color, isNew, year, mileage, price);
 		carDB.add(car);
 		lot.setCars(carDB);
 	}
@@ -70,9 +70,9 @@ public class CarManagementService {
 	}
 	
 	public int getCarIndex(Car car) {
-		String checkCar = car.getVin() + car.getMake();
+		String checkCar = car.getId() + car.getMake();
 		for(int i = 0; i < carDB.size(); i++) {
-			String carI = carDB.get(i).getVin() + carDB.get(i).getMake();
+			String carI = carDB.get(i).getId() + carDB.get(i).getMake();
 			if(checkCar.equals(carI)) {
 				return i;
 			}

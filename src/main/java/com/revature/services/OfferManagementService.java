@@ -75,7 +75,7 @@ public class OfferManagementService {
 		}
 		
 		for(int j = carDB.size() - 1; j > 0; j--) {
-			if(o.getCar().getVin().equals(carDB.get(j).getVin())){
+			if(o.getCar().getId() == carDB.get(j).getId()){
 				carDB.remove(j);
 			}
 			lot.setCars(carDB);
@@ -92,11 +92,11 @@ public class OfferManagementService {
 	
 	public int findOffer(Offer o) {
 		String oUser = o.getCustomer().getUsername();
-		String oCar = o.getCar().getVin() + o.getCar().getModel();
+		String oCar = o.getCar().getId() + o.getCar().getModel();
 		String oStr = oUser + oCar + o.getAmount();
 		for(int i = 0; i < offerDB.size(); i++) {
 			String iUser = offerDB.get(i).getCustomer().getUsername();
-			String iCar = offerDB.get(i).getCar().getVin() + offerDB.get(i).getCar().getModel();
+			String iCar = offerDB.get(i).getCar().getId() + offerDB.get(i).getCar().getModel();
 			String iStr = iUser + iCar + offerDB.get(i).getAmount();
 			if(oStr.equals(iStr)) {
 				return i;

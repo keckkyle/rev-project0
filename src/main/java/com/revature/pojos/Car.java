@@ -1,14 +1,12 @@
 package com.revature.pojos;
 
 import java.io.Serializable;
-import java.util.ArrayList;
-import java.util.List;
 
 public class Car implements Serializable {
 
 	private static final long serialVersionUID = 4178172927577311763L;
 	
-	private String vin;
+	private int id;
 	private String make;
 	private String model;
 	private String color;
@@ -16,15 +14,14 @@ public class Car implements Serializable {
 	private String year;
 	private String mileage;
 	private int price;
-	private List<Offer> offers = new ArrayList<Offer>();
+	private int ownedBy;
 	
 	public Car() {
 		super();
 	}
 
-	public Car(String vin, String make, String model, String color, boolean isNew, String year, String mileage, int price) {
+	public Car(String make, String model, String color, boolean isNew, String year, String mileage, int price) {
 		super();
-		this.vin = vin;
 		this.make = make;
 		this.model = model;
 		this.color = color;
@@ -33,13 +30,29 @@ public class Car implements Serializable {
 		this.mileage = mileage;
 		this.price = price;
 	}
+	
+	
 
-	public String getVin() {
-		return vin;
+	public Car(int id, String make, String model, String color, boolean isNew, String year, String mileage, int price,
+			int ownedBy) {
+		super();
+		this.id = id;
+		this.make = make;
+		this.model = model;
+		this.color = color;
+		this.isNew = isNew;
+		this.year = year;
+		this.mileage = mileage;
+		this.price = price;
+		this.ownedBy = ownedBy;
+	}
+
+	public int getId() {
+		return id;
 	}
 	
-	public void setVin(String vin) {
-		this.vin = vin.toUpperCase();
+	public void setId(int id) {
+		this.id = id;
 	}
 	
 	public String getMake() {
@@ -98,12 +111,12 @@ public class Car implements Serializable {
 		this.price = price;
 	}
 
-	public List<Offer> getOffers() {
-		return offers;
+	public int getOwnedBy() {
+		return ownedBy;
 	}
 
-	public void setOffers(List<Offer> offers) {
-		this.offers = offers;
+	public void setOwnedBy(int userid) {
+		this.ownedBy = userid;
 	}
 
 	@Override
