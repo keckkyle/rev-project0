@@ -416,3 +416,15 @@
 2020-01-19 16:31:09 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
 2020-01-19 16:31:42 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
 2020-01-19 16:31:42 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 17:21:44 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-19 17:21:44 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 17:39:40 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-19 17:39:40 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 17:48:49 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-19 17:48:49 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 21:25:02 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-19 21:25:02 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 21:25:14 DEBUG root:19 - com.revature.pojos.Employee; local class incompatible: stream classdesc serialVersionUID = -6897125578740620753, local class serialVersionUID = 1
+2020-01-19 21:25:14 DEBUG root:19 - com.revature.pojos.Payment; local class incompatible: stream classdesc serialVersionUID = -3208850258674555270, local class serialVersionUID = 1
+2020-01-19 22:37:03 DEBUG root:19 - ERROR: duplicate key value violates unique constraint "offer_pkey"
+  Detail: Key (car_id, user_id)=(6, 3) already exists.

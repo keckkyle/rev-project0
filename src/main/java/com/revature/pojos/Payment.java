@@ -8,21 +8,24 @@ public class Payment implements Serializable {
 	private Car car;
 	private User customer;
 	private int purchasePrice;
-	private int paymentLength = 60;
+	private int remainingPayments = 60;
 	private int remainingBalance;
-	private int monthlyPayment;
 	
-	public Payment(Car car, int amount, User customer) {
+	public Payment(Car car, User customer, int amount) {
 		super();
 		this.car = car;
 		this.customer = customer;
 		this.purchasePrice = amount;
 		this.remainingBalance = amount;
-		this.monthlyPayment = calcMonthly();
 	}
-	
-	private int calcMonthly() {
-		return this.purchasePrice / this.paymentLength;
+
+	public Payment(Car car, User customer, int purchasePrice, int remainingBalance, int remainingPayments) {
+		super();
+		this.car = car;
+		this.customer = customer;
+		this.purchasePrice = purchasePrice;
+		this.remainingBalance = remainingBalance;
+		this.remainingPayments = remainingPayments;
 	}
 
 	public Car getCar() {
@@ -56,14 +59,19 @@ public class Payment implements Serializable {
 	public void setRemainingBalance(int remainingBalance) {
 		this.remainingBalance = remainingBalance;
 	}
-	
-	public int getPaymentLength() {
-		return paymentLength;
+
+	public int getRemainingPayments() {
+		return remainingPayments;
 	}
 
-	public int getMonthlyPayment() {
-		return monthlyPayment;
+	public void setRemainingPayments(int remainingPayments) {
+		this.remainingPayments = remainingPayments;
 	}
+	
+	public int getMonthlyPayment() {
+		return this.remainingBalance / this.remainingPayments;
+	}
+
 
 	@Override
 	public String toString() {

@@ -1,28 +1,24 @@
 package com.revature.services;
 
-import java.util.List;
 import java.util.Scanner;
 
+import com.revature.dao.CarDAOPostgres;
 import com.revature.pojos.Car;
-import com.revature.pojos.Lot;
-//import com.revature.util.LoggerUtil;
+
+import static com.revature.menus.Menu.carDB;
 
 public class CarManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
 	
-	private static Lot lot;
-	private static List<Car> carDB;
 	private static Scanner scan = new Scanner(System.in);
+	private static CarDAOPostgres cDaoP = new CarDAOPostgres();
 
-	public CarManagementService(Lot l) {
+	public CarManagementService() {
 		super();
-		lot = l;
-		carDB = l.getCars();
 	}
 
 	public void viewCars(){
 		for(Car c: carDB) {
-			
 			System.out.println("[" + (carDB.indexOf(c) + 1) + "] " + c.toString() + ", mileage: " + c.getMileage() + " - Listed for $" + c.getPrice());
 		}
 	}
@@ -33,9 +29,6 @@ public class CarManagementService {
 		System.out.println("Add a new car to the lot");
 		System.out.println("Is car new? [y/n]");
 		String newCar = scan.nextLine().toLowerCase();
-		System.out.println("Add car VIN:");
-		String vin = scan.nextLine();
-		vin = vin.toUpperCase();
 		System.out.println("Add car make:");
 		String make = scan.nextLine();
 		System.out.println("Add car model:");
@@ -59,14 +52,13 @@ public class CarManagementService {
 		price = Integer.parseInt(priceStr);
 		
 		Car car = new Car(make, model, color, isNew, year, mileage, price);
-		carDB.add(car);
-		lot.setCars(carDB);
+		cDaoP.createCar(car);
+		carDB = cDaoP.readUnownedCars();
 	}
 	
 	public void removeCar(Car car) {
-		int index = getCarIndex(car);
-		carDB.remove(index);
-		lot.setCars(carDB);
+		cDaoP.deleteCar(car);
+		carDB = cDaoP.readUnownedCars();
 	}
 	
 	public int getCarIndex(Car car) {

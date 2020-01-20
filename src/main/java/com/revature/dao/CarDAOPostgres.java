@@ -110,7 +110,22 @@ public class CarDAOPostgres implements CarDAO {
 
 	@Override
 	public void deleteCar(Car car) {
-		// TODO Auto-generated method stub
+		String sql = "Delete from car where car_id = ?";
+		Connection conn = ConnectionFactory.getConnection();
+		
+		try {
+			PreparedStatement stmt = conn.prepareStatement(sql);
+			stmt.setInt(1, car.getId());
+			stmt.executeUpdate();
+		} catch (SQLException e) {
+			log.debug(e.getMessage());
+		} finally {
+			try {
+				conn.close();
+			} catch (SQLException e) {
+				log.debug(e.getMessage());
+			}
+		}
 
 	}
 

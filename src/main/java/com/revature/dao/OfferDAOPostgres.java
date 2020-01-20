@@ -88,8 +88,37 @@ public class OfferDAOPostgres implements OfferDAO {
 	public List<Offer> readAllOffers() {
 		String sql = "Select * from offer";
 		
-		Connection conn = ConnectionFactory.getConnection();
+		return returnOffers(sql);
+	}
 	
+	@Override
+	public List<Offer> readPendingOffers(){
+		String sql = "Select * from offer where status = 1";
+		
+		return returnOffers(sql);
+	}
+
+	@Override
+	public List<Offer> readOffersByUser(User user) {
+		String sql = "Select * from offer where user_id = ?";
+		
+		int id = user.getId();
+		
+		return returnOffers(sql, id);
+	}
+
+	@Override
+	public List<Offer> readOffersByCar(Car car) {
+		String sql = "Select * from offer where car_id = ?";
+		
+		int id = car.getId();
+		
+		return returnOffers(sql, id);
+	}
+	
+	private List<Offer> returnOffers(String sql){
+		Connection conn = ConnectionFactory.getConnection();
+		
 		List<Offer> offers = new ArrayList<Offer>();
 		
 		try {
@@ -113,24 +142,6 @@ public class OfferDAOPostgres implements OfferDAO {
 		}
 		
 		return offers;
-	}
-
-	@Override
-	public List<Offer> readOffersByUser(User user) {
-		String sql = "Select * from offer where user_id = ?";
-		
-		int id = user.getId();
-		
-		return returnOffers(sql, id);
-	}
-
-	@Override
-	public List<Offer> readOffersByCar(Car car) {
-		String sql = "Select * from offer where car_id = ?";
-		
-		int id = car.getId();
-		
-		return returnOffers(sql, id);
 	}
 	
 	private List<Offer> returnOffers(String sql, int id) {

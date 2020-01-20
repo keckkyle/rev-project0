@@ -18,6 +18,8 @@ public interface OfferDAO {
 	
 	public List<Offer> readAllOffers();
 	
+	public List<Offer> readPendingOffers();
+	
 	public List<Offer> readOffersByUser(User user);
 	
 	public List<Offer> readOffersByCar(Car car);

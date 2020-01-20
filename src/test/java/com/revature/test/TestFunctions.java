@@ -15,12 +15,8 @@ import com.revature.services.OfferManagementService;
 import com.revature.services.PaymentManagementService;
 import com.revature.services.UserLoginService;
 import com.revature.util.LoggerUtil;
-import com.revature.dao.CarDAOPostgres;
-import com.revature.dao.OfferDAOPostgres;
-import com.revature.dao.UserDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Customer;
-import com.revature.pojos.Employee;
 import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
@@ -53,10 +49,10 @@ public class TestFunctions {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		cms = new CarManagementService(lot);
-		uls = new UserLoginService(lot);
-		oms = new OfferManagementService(lot);
-		pms = new PaymentManagementService(lot);
+		cms = new CarManagementService();
+		uls = new UserLoginService();
+		oms = new OfferManagementService();
+		pms = new PaymentManagementService();
 		
 		cars = lot.getCars();
 		users = lot.getUsers();
@@ -179,10 +175,10 @@ public class TestFunctions {
 		pms.viewPayments(cust1);
 	}
 	
-	@Test
-	public void showRemainingPayments() {
-		pms.getCarPayments(car1);
-	}
+//	@Test
+//	public void showRemainingPayments() {
+//		pms.getCarPayments(car1);
+//	}
 	
 	@Test 
 	public void viewAlloffers() {
@@ -217,26 +213,4 @@ public class TestFunctions {
 		pms.viewPayments();
 	}
 
-	
-	@Test
-	public void addCar() {
-		Car car = new Car("Honda", "Civic", "Blue", false, "2016", "68593", 10595);
-		CarDAOPostgres cDAOp = new CarDAOPostgres();
-		cDAOp.createCar(car);
-	}
-	
-	@Test
-	public void createOffer() {
-		OfferDAOPostgres oDAOP = new OfferDAOPostgres();
-		Car car = new Car("F","Z","Pink",false,"3030","12533", 12345);
-		car.setId(1);
-		User user = new User("Kyle","Kyle","Kyle");
-		user.setId(7);
-		Offer offer = new Offer(car, user, 10987);
-		List<Offer> offers = oDAOP.readOffersByUser(user);
-		for(Offer o : offers) {
-			System.out.println(o.toString());
-		}
-		
-	}
 }

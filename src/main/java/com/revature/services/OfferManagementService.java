@@ -1,13 +1,19 @@
 package com.revature.services;
 
-import java.util.List;
 import java.util.Scanner;
+
+import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.OfferDAOPostgres;
+import com.revature.dao.PaymentDAOPostgres;
 import com.revature.pojos.Car;
-import com.revature.pojos.Lot;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
 import com.revature.pojos.User;
 //import com.revature.util.LoggerUtil;
+
+import static com.revature.menus.Menu.carDB;
+import static com.revature.menus.Menu.offerDB;
+import static com.revature.menus.Menu.paymentDB;
 
 public class OfferManagementService {
 	
@@ -15,17 +21,12 @@ public class OfferManagementService {
 	
 	private static Scanner scan = new Scanner(System.in);
 	
-	private static Lot lot;
-	private static List<Car> carDB;
-	private static List<Offer> offerDB;
-	private static List<Payment> paymentDB;
-	
-	public OfferManagementService (Lot l) {
+	private static OfferDAOPostgres oDaoP = new OfferDAOPostgres();
+	private static PaymentDAOPostgres pDaoP = new PaymentDAOPostgres();
+	private static CarDAOPostgres cDaoP = new CarDAOPostgres();
+
+	public OfferManagementService () {
 		super();
-		lot = l;
-		offerDB = l.getOffers();
-		paymentDB = l.getPayments();
-		carDB = l.getCars();
 	}
 	
 	public void viewOffers() {
@@ -43,9 +44,9 @@ public class OfferManagementService {
 			int amount = Integer.parseInt(price);
 		
 			Offer offer = new Offer(car, customer, amount);
-			offerDB.add(offer);
-		
-			lot.setOffers(offerDB);
+			oDaoP.createOffer(offer);
+			offerDB = oDaoP.readPendingOffers();
+
 		} else {
 			System.out.println("Invalid offer");
 		}
@@ -55,39 +56,38 @@ public class OfferManagementService {
 		int index = findOffer(o);
 		if(index != -1) {
 			Offer accepted = offerDB.get(index);
+			accepted.setStatus(2);
 			Car car = accepted.getCar();
 			User customer = accepted.getCustomer();
 			int amount = accepted.getAmount();
+			
+			car.setOwnedBy(customer.getId());
 		
-			Payment payment = new Payment(car, amount, customer);
-			paymentDB.add(payment);
+			Payment payment = new Payment(car, customer, amount);
 			
-			offerDB.remove(index);
+			pDaoP.createPayment(payment);
 			
-			lot.setPayments(paymentDB);
+			oDaoP.updateOffer(accepted);
+			
+			cDaoP.updateCar(car);
 		}
 		
 		for(int i = offerDB.size() - 1; i > 0; i--) {
-			if(o.getCar().toString().equals(offerDB.get(i).getCar().toString())) {
-				offerDB.remove(i);
+			if( o.getCar().getId() == offerDB.get(i).getCar().getId() && offerDB.get(i).getStatus() == 1) {
+				offerDB.get(i).setStatus(3);
+				oDaoP.updateOffer(offerDB.get(i));
 			}
-			lot.setOffers(offerDB);
 		}
 		
-		for(int j = carDB.size() - 1; j > 0; j--) {
-			if(o.getCar().getId() == carDB.get(j).getId()){
-				carDB.remove(j);
-			}
-			lot.setCars(carDB);
-		}
+		paymentDB = pDaoP.readAllPayments();
+		offerDB = oDaoP.readPendingOffers();
+		carDB = cDaoP.readUnownedCars();
 	}
 	
 	public void rejectOffer(Offer o) {
-		int index = findOffer(o);
-		if(index != -1) {
-			offerDB.remove(index);
-		}
-		lot.setOffers(offerDB);
+		o.setStatus(3);
+		oDaoP.updateOffer(o);
+		offerDB = oDaoP.readPendingOffers();
 	}
 	
 	public int findOffer(Offer o) {

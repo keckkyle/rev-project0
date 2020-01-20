@@ -17,5 +17,5 @@ public interface PaymentDAO {
 	
 	public List<Payment> readAllPayments();
 	
-	public List<Payment> readPaymentsByUserId(User user);
+	public List<Payment> readPaymentsByUser(User user);
 }

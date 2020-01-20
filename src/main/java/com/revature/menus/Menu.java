@@ -3,7 +3,10 @@ package com.revature.menus;
 import java.util.List;
 import java.util.Scanner;
 
-import com.revature.drivers.Driver;
+import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.OfferDAOPostgres;
+import com.revature.dao.PaymentDAOPostgres;
+import com.revature.dao.UserDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Offer;
 import com.revature.pojos.Payment;
@@ -15,16 +18,25 @@ import com.revature.services.UserLoginService;
 
 public class Menu {
 	
-	protected static Scanner scan = new Scanner(System.in);
-	protected static User current = null;
-	protected static UserLoginService uls = new UserLoginService(Driver.myLot);
-	protected static CarManagementService cms = new CarManagementService(Driver.myLot);
-	protected static OfferManagementService oms = new OfferManagementService(Driver.myLot);
-	protected static PaymentManagementService pms = new PaymentManagementService(Driver.myLot);
+	private static UserDAOPostgres uDaoP = new UserDAOPostgres();
+	private static CarDAOPostgres cDaoP = new CarDAOPostgres();
+	private static PaymentDAOPostgres pDaoP = new PaymentDAOPostgres();
+	private static OfferDAOPostgres oDaoP = new OfferDAOPostgres();
 	
-	protected static List<Car> carDB = Driver.myLot.getCars();
-	protected static List<Offer> offerDB = Driver.myLot.getOffers();
-	protected static List<Payment> paymentDB = Driver.myLot.getPayments();
+	protected static Scanner scan = new Scanner(System.in);
+	
+	protected static UserLoginService uls = new UserLoginService();
+	protected static CarManagementService cms = new CarManagementService();
+	protected static OfferManagementService oms = new OfferManagementService();
+	protected static PaymentManagementService pms = new PaymentManagementService();
+	
+	public static User current = null;
+	public static List<User> userDB = uDaoP.readAllUsers();
+	public static List<Car> carDB = cDaoP.readUnownedCars();
+	public static List<Offer> offerDB = oDaoP.readPendingOffers();
+	public static List<Payment> paymentDB = pDaoP.readAllPayments();
+	
+	
 	
 	public static void userWait() {
 		System.out.println("=== Press Enter to return to menu ===");
