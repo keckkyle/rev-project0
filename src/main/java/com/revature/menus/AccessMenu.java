@@ -1,15 +1,24 @@
 package com.revature.menus;
 
+import java.util.Scanner;
+
 import com.revature.pojos.Employee;
 import com.revature.pojos.User;
+import com.revature.services.UserLoginService;
 
-public class ConsoleMenu extends Menu {
+public class AccessMenu {
+	
+	private static Scanner scan = new Scanner(System.in);
+	
+	private static UserLoginService uls = UserLoginService.getULS();
+	
+	private static User current;
 
-	public ConsoleMenu() {
+	public AccessMenu() {
 		super();
 	}
 
-	public static void menuOptions() {
+	public void menuOptions() {
 		String option = " ";
 		
 		do {
@@ -24,7 +33,7 @@ public class ConsoleMenu extends Menu {
 		} while (!"4".equals(option));
 	}
 	
-	private static void performUserSelection(String option) {
+	private void performUserSelection(String option) {
 		switch (option) {
 		case "1":
 			current = uls.createNewUser();
@@ -49,11 +58,13 @@ public class ConsoleMenu extends Menu {
 		}
 	}
 	
-	private static void selectUserMenu(User user) {
+	private void selectUserMenu(User user) {
 		if(user instanceof Employee) {
-			EmployeeMenu.menuOptions();
+			EmployeeMenu em = EmployeeMenu.getMenu();
+			em.menuOptions();
 		} else {
-			CustomerMenu.menuOptions();
+			CustomerMenu cm = CustomerMenu.getMenu(user);
+			cm.menuOptions();
 		}
 	}
 }

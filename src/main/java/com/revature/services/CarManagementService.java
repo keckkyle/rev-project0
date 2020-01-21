@@ -1,23 +1,32 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.CarDAOPostgres;
 import com.revature.pojos.Car;
 
-import static com.revature.menus.Menu.carDB;
-
 public class CarManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
 	
 	private static Scanner scan = new Scanner(System.in);
-	private static CarDAOPostgres cDaoP = new CarDAOPostgres();
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	
+	private static CarManagementService cms;
 
-	public CarManagementService() {
+	private CarManagementService() {
 		super();
+	}
+	
+	public static CarManagementService getCMS() {
+		if(cms == null) {
+			cms = new CarManagementService();
+		}
+		return cms;
 	}
 
 	public void viewCars(){
+		List<Car> carDB = cDao.readUnownedCars();
 		for(Car c: carDB) {
 			System.out.println("[" + (carDB.indexOf(c) + 1) + "] " + c.toString() + ", mileage: " + c.getMileage() + " - Listed for $" + c.getPrice());
 		}
@@ -52,23 +61,21 @@ public class CarManagementService {
 		price = Integer.parseInt(priceStr);
 		
 		Car car = new Car(make, model, color, isNew, year, mileage, price);
-		cDaoP.createCar(car);
-		carDB = cDaoP.readUnownedCars();
+		cDao.createCar(car);
 	}
 	
 	public void removeCar(Car car) {
-		cDaoP.deleteCar(car);
-		carDB = cDaoP.readUnownedCars();
+		cDao.deleteCar(car);
 	}
 	
-	public int getCarIndex(Car car) {
-		String checkCar = car.getId() + car.getMake();
-		for(int i = 0; i < carDB.size(); i++) {
-			String carI = carDB.get(i).getId() + carDB.get(i).getMake();
-			if(checkCar.equals(carI)) {
-				return i;
-			}
-		}
-		return -1;
-	}
+//	public int getCarIndex(Car car) {
+//		String checkCar = car.getId() + car.getMake();
+//		for(int i = 0; i < carDB.size(); i++) {
+//			String carI = carDB.get(i).getId() + carDB.get(i).getMake();
+//			if(checkCar.equals(carI)) {
+//				return i;
+//			}
+//		}
+//		return -1;
+//	}
 }

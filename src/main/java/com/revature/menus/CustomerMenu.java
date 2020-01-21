@@ -1,14 +1,47 @@
 package com.revature.menus;
 
-import com.revature.pojos.Car;
+import java.util.List;
+import java.util.Scanner;
 
-public class CustomerMenu extends Menu {
+import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.PaymentDAOPostgres;
+import com.revature.pojos.Car;
+import com.revature.pojos.Payment;
+import com.revature.pojos.User;
+import com.revature.services.CarManagementService;
+import com.revature.services.OfferManagementService;
+import com.revature.services.PaymentManagementService;
+
+import static com.revature.services.UserInterfaceService.stringToInteger;
+import static com.revature.services.UserInterfaceService.userWait;
+
+public class CustomerMenu {
 	
-	public CustomerMenu() {
+	private static Scanner scan = new Scanner(System.in);
+	
+	private static CarManagementService cms = CarManagementService.getCMS();
+	private static OfferManagementService oms = OfferManagementService.getOMS();
+	private static PaymentManagementService pms = PaymentManagementService.getPMS();
+	
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	private static PaymentDAOPostgres pDao = PaymentDAOPostgres.getPaymentDAO();
+	
+	private static CustomerMenu cm;
+	private static User current;
+	
+	private CustomerMenu() {
 		super();
 	}
+	
+	public static CustomerMenu getMenu(User user) {
+		if(cm == null) {
+			cm = new CustomerMenu();
+		}
+		current = user;
+		return cm;
+	}
 
-	public static void menuOptions() {
+	public void menuOptions() {
 		String option = " ";
 		
 		do {
@@ -24,7 +57,9 @@ public class CustomerMenu extends Menu {
 		} while (!"6".equals(option));
 	}
 	
-	private static void performUserSelection(String option) {
+	private void performUserSelection(String option) {
+		List<Car> carDB = cDao.readUnownedCars();
+		List<Payment> paymentDB = pDao.readAllPayments();
 		switch (option) {
 		case "1":
 			System.out.println();

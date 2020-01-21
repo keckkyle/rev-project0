@@ -1,5 +1,6 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.CarDAOPostgres;
@@ -11,25 +12,31 @@ import com.revature.pojos.Payment;
 import com.revature.pojos.User;
 //import com.revature.util.LoggerUtil;
 
-import static com.revature.menus.Menu.carDB;
-import static com.revature.menus.Menu.offerDB;
-import static com.revature.menus.Menu.paymentDB;
-
 public class OfferManagementService {
 	
 //	private static LoggerUtil log = new LoggerUtil();
 	
 	private static Scanner scan = new Scanner(System.in);
 	
-	private static OfferDAOPostgres oDaoP = new OfferDAOPostgres();
-	private static PaymentDAOPostgres pDaoP = new PaymentDAOPostgres();
-	private static CarDAOPostgres cDaoP = new CarDAOPostgres();
+	private static OfferDAOPostgres oDao = OfferDAOPostgres.getOfferDAO();
+	private static PaymentDAOPostgres pDao = PaymentDAOPostgres.getPaymentDAO();
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	
+	private static OfferManagementService oms;
 
-	public OfferManagementService () {
+	private OfferManagementService() {
 		super();
 	}
 	
+	public static OfferManagementService getOMS() {
+		if(oms == null) {
+			oms = new OfferManagementService();
+		}
+		return oms;
+	}
+	
 	public void viewOffers() {
+		List<Offer> offerDB = oDao.readPendingOffers();
 		for(Offer o : offerDB) {
 			System.out.println("[" + (offerDB.indexOf(o) + 1) + "] " + o.toString() + ": Listed at $" + o.getCar().getPrice());
 		}
@@ -45,8 +52,7 @@ public class OfferManagementService {
 			int amount = Integer.parseInt(price);
 		
 			Offer offer = new Offer(car, customer, amount);
-			oDaoP.createOffer(offer);
-			offerDB = oDaoP.readPendingOffers();
+			oDao.createOffer(offer);
 
 		} else {
 			System.out.println("Invalid offer");
@@ -54,7 +60,8 @@ public class OfferManagementService {
 	}
 	
 	public void acceptOffer(Offer o) {
-		int index = findOffer(o);
+		List<Offer> offerDB = oDao.readPendingOffers();
+		int index = findOffer(o, offerDB);
 		if(index != -1) {
 			Offer accepted = offerDB.get(index);
 			accepted.setStatus(2);
@@ -66,32 +73,28 @@ public class OfferManagementService {
 		
 			Payment payment = new Payment(car, customer, amount);
 			
-			pDaoP.createPayment(payment);
+			pDao.createPayment(payment);
 			
-			oDaoP.updateOffer(accepted);
+			oDao.updateOffer(accepted);
 			
-			cDaoP.updateCar(car);
+			cDao.updateCar(car);
 		}
 		
 		for(int i = offerDB.size() - 1; i > 0; i--) {
 			if( o.getCar().getId() == offerDB.get(i).getCar().getId() && offerDB.get(i).getStatus() == 1) {
 				offerDB.get(i).setStatus(3);
-				oDaoP.updateOffer(offerDB.get(i));
+				oDao.updateOffer(offerDB.get(i));
 			}
 		}
-		
-		paymentDB = pDaoP.readAllPayments();
-		offerDB = oDaoP.readPendingOffers();
-		carDB = cDaoP.readUnownedCars();
+
 	}
 	
 	public void rejectOffer(Offer o) {
 		o.setStatus(3);
-		oDaoP.updateOffer(o);
-		offerDB = oDaoP.readPendingOffers();
+		oDao.updateOffer(o);
 	}
 	
-	public int findOffer(Offer o) {
+	public int findOffer(Offer o, List<Offer> offerDB) {
 		String oUser = o.getCustomer().getUsername();
 		String oCar = o.getCar().getId() + o.getCar().getModel();
 		String oStr = oUser + oCar + o.getAmount();

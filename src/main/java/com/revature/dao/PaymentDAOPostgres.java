@@ -18,8 +18,21 @@ public class PaymentDAOPostgres implements PaymentDAO {
 	
 	private static LoggerUtil log = new LoggerUtil();
 	
-	private static CarDAOPostgres cDao = new CarDAOPostgres();
-	private static UserDAOPostgres uDao = new UserDAOPostgres();
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	private static UserDAOPostgres uDao = UserDAOPostgres.getUserDAO();
+	
+	private static PaymentDAOPostgres pDao;
+
+	private PaymentDAOPostgres() {
+		super();
+	}
+	
+	public static PaymentDAOPostgres getPaymentDAO() {
+		if(pDao == null) {
+			pDao = new PaymentDAOPostgres();
+		}
+		return pDao;
+	}
 
 	@Override
 	public void createPayment(Payment payment) {

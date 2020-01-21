@@ -18,6 +18,19 @@ public class UserDAOPostgres implements UserDAO {
 
 	private static LoggerUtil log = new LoggerUtil();
 	
+	private static UserDAOPostgres uDao;
+	
+	private UserDAOPostgres() {
+		super();
+	}
+	
+	public static UserDAOPostgres getUserDAO() {
+		if(uDao == null) {
+			uDao = new UserDAOPostgres();
+		}
+		return uDao;
+	}
+
 	@Override
 	public void createUser(User user) {
 		String sql = "Insert into users (full_name, username, user_password) values (?,?,?)";

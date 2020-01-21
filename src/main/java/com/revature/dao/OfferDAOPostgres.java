@@ -18,8 +18,21 @@ public class OfferDAOPostgres implements OfferDAO {
 	
 	private static LoggerUtil log = new LoggerUtil();
 	
-	private static CarDAOPostgres cDao = new CarDAOPostgres();
-	private static UserDAOPostgres uDao = new UserDAOPostgres();
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	private static UserDAOPostgres uDao = UserDAOPostgres.getUserDAO();
+	
+	private static OfferDAOPostgres oDao;
+	
+	private OfferDAOPostgres() {
+		super();
+	}
+	
+	public static OfferDAOPostgres getOfferDAO(){
+		if(oDao == null) {
+			oDao = new OfferDAOPostgres();
+		}
+		return oDao;
+	}
 
 	@Override
 	public void createOffer(Offer offer) {

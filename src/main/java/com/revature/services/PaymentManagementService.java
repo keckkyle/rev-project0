@@ -1,26 +1,34 @@
 package com.revature.services;
 
-import com.revature.menus.Menu;
-import com.revature.pojos.Car;
 import com.revature.pojos.Payment;
 import com.revature.pojos.User;
-
-import static com.revature.menus.Menu.paymentDB;
 
 import java.util.List;
 
 import com.revature.dao.PaymentDAOPostgres;
 
+import static com.revature.services.UserInterfaceService.userWait;
+
 public class PaymentManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
 	
-	private static PaymentDAOPostgres pDaoP = new PaymentDAOPostgres();
+	private static PaymentDAOPostgres pDao = PaymentDAOPostgres.getPaymentDAO();
+	
+	private static PaymentManagementService pms;
 
-	public PaymentManagementService() {
+	private PaymentManagementService() {
 		super();
+	}
+	
+	public static PaymentManagementService getPMS() {
+		if(pms == null) {
+			pms = new PaymentManagementService();
+		}
+		return pms;
 	}
 
 	public void viewPayments(){
+		List<Payment> paymentDB = pDao.readAllPayments();
 		for(Payment p: paymentDB) {
 			String car = p.getCar().getMake() + " "+ p.getCar().getModel();
 			String pString = p.getCustomer().getUsername() + " owes $"+ p.getRemainingBalance() + " on " + car;
@@ -29,9 +37,9 @@ public class PaymentManagementService {
 	}
 	
 	public void viewPayments(User user) {
-		List<Payment> userPayments = pDaoP.readPaymentsByUser(user);
+		List<Payment> userPayments = pDao.readPaymentsByUser(user);
 		if(userPayments.size() < 1) {
-			System.out.print("No cars found");
+			System.out.println("No cars found");
 		} else {
 			for(Payment p : userPayments) {
 				System.out.println("[" + (userPayments.indexOf(p) + 1) + "] " + p.getCar().toString());
@@ -50,7 +58,7 @@ public class PaymentManagementService {
 //	}
 	
 	public void getCarPayments(int i, User user) {
-		List<Payment> userPayments = pDaoP.readPaymentsByUser(user);
+		List<Payment> userPayments = pDao.readPaymentsByUser(user);
 		if( i < 0 || i >= userPayments.size() ) {
 			System.out.println("Invalid selection");
 		} else {
@@ -58,18 +66,18 @@ public class PaymentManagementService {
 			int monthly = userPayments.get(i).getMonthlyPayment();
 			System.out.println("[" + userPayments.get(i).getCar().toString() + "]");
 			System.out.println("You have " + length + " payments of $" + monthly + " remaining.");
-			Menu.userWait();
+			userWait();
 		}
 	}
 	
-	public int findCar(Car c) {
-		int carVIN = c.getId();
-		for(int i = 0; i < paymentDB.size(); i++) {
-			int carI = paymentDB.get(i).getCar().getId();
-			if(carVIN == carI) {
-				return i;
-			}
-		}
-		return -1;
-	}
+//	public int findCar(Car c) {
+//		int carVIN = c.getId();
+//		for(int i = 0; i < paymentDB.size(); i++) {
+//			int carI = paymentDB.get(i).getCar().getId();
+//			if(carVIN == carI) {
+//				return i;
+//			}
+//		}
+//		return -1;
+//	}
 }

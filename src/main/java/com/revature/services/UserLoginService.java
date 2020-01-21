@@ -1,24 +1,28 @@
 package com.revature.services;
 
+import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.UserDAOPostgres;
 import com.revature.pojos.Customer;
 import com.revature.pojos.User;
-//import com.revature.util.LoggerUtil;
-
-import static com.revature.menus.Menu.userDB;
 
 public class UserLoginService {
 	
-//	private static LoggerUtil log = new LoggerUtil();
-
-
 	private static Scanner scan = new Scanner(System.in);
-	private static UserDAOPostgres uDaoP = new UserDAOPostgres();
+	private static UserDAOPostgres uDao = UserDAOPostgres.getUserDAO();
 	
-	public UserLoginService() {
+	private static UserLoginService uls;
+
+	private UserLoginService() {
 		super();
+	}
+	
+	public static UserLoginService getULS() {
+		if(uls == null) {
+			uls = new UserLoginService();
+		}
+		return uls;
 	}
 	
 	public User createNewUser() {
@@ -42,10 +46,10 @@ public class UserLoginService {
 		
 		User newUser = new Customer(name, username, password);
 		
-		uDaoP.createUser(newUser);
+		uDao.createUser(newUser);
 		
-		newUser = uDaoP.readUser(username);
-		userDB = uDaoP.readAllUsers();
+		newUser = uDao.readUser(username);
+
 		return newUser;
 	}
 	
@@ -76,6 +80,7 @@ public class UserLoginService {
 	}
 	
 	private User searchUsers(String input) {
+		List<User> userDB = uDao.readAllUsers();
 		for(User u : userDB) {
 			if(u.getUsername().equals(input)) {
 				return u;

@@ -1,18 +1,46 @@
 package com.revature.menus;
 
+import java.util.List;
+import java.util.Scanner;
+
+import com.revature.dao.CarDAOPostgres;
+import com.revature.dao.OfferDAOPostgres;
 import com.revature.pojos.Car;
 import com.revature.pojos.Offer;
-//import com.revature.util.LoggerUtil;
+import com.revature.services.CarManagementService;
+import com.revature.services.OfferManagementService;
+import com.revature.services.PaymentManagementService;
 
-public class EmployeeMenu extends Menu {
+import static com.revature.services.UserInterfaceService.userWait;
+import static com.revature.services.UserInterfaceService.stringToInteger;
+
+
+public class EmployeeMenu {
 	
-//	private static LoggerUtil log = new LoggerUtil();
+	private static Scanner scan = new Scanner(System.in);
 	
-	public EmployeeMenu() {
+	private static CarManagementService cms = CarManagementService.getCMS();
+	private static OfferManagementService oms = OfferManagementService.getOMS();
+	private static PaymentManagementService pms = PaymentManagementService.getPMS();
+	
+	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
+	private static OfferDAOPostgres oDao = OfferDAOPostgres.getOfferDAO();
+	
+	private static EmployeeMenu em;
+	
+	private EmployeeMenu() {
 		super();
 	}
+	
+	public static EmployeeMenu getMenu() {
+		if(em==null) {
+			em = new EmployeeMenu();
+		}
+		return em;
+	}
+	
 
-	public static void menuOptions() {
+	public void menuOptions() {
 		String option = " ";
 		
 		do {
@@ -32,7 +60,9 @@ public class EmployeeMenu extends Menu {
 		
 	}
 	
-	private static void performUserSelection(String option) {
+	private void performUserSelection(String option) {
+		List<Car> carDB = cDao.readUnownedCars();
+		List<Offer> offerDB = oDao.readAllOffers();
 		switch (option) {
 		case "1":
 			System.out.println();

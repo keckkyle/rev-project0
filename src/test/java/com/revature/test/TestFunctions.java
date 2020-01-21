@@ -49,10 +49,10 @@ public class TestFunctions {
 	@BeforeClass
 	public static void setUpBeforeClass() throws Exception {
 
-		cms = new CarManagementService();
-		uls = new UserLoginService();
-		oms = new OfferManagementService();
-		pms = new PaymentManagementService();
+		cms = CarManagementService.getCMS();
+		uls = UserLoginService.getULS();
+		oms = OfferManagementService.getOMS();
+		pms = PaymentManagementService.getPMS();
 		
 		cars = lot.getCars();
 		users = lot.getUsers();

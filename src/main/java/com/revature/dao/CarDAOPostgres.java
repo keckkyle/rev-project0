@@ -15,6 +15,19 @@ import com.revature.util.LoggerUtil;
 public class CarDAOPostgres implements CarDAO {
 	
 	private static LoggerUtil log = new LoggerUtil();
+	
+	private static CarDAOPostgres cDao;
+	
+	private CarDAOPostgres() {
+		super();
+	}
+	
+	public static CarDAOPostgres getCarDAO() {
+		if(cDao == null) {
+			cDao = new CarDAOPostgres();
+		}
+		return cDao;
+	}
 
 	@Override
 	public void createCar(Car car) {
