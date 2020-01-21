@@ -1,5 +1,7 @@
 package com.revature.services;
 
+import static com.revature.services.UserInterfaceService.stringToInteger;
+
 import java.util.List;
 import java.util.Scanner;
 
@@ -22,6 +24,8 @@ public class OfferManagementService {
 	private static PaymentDAOPostgres pDao = PaymentDAOPostgres.getPaymentDAO();
 	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
 	
+	private static CarManagementService cms = CarManagementService.getCMS();
+	
 	private static OfferManagementService oms;
 
 	private OfferManagementService() {
@@ -42,20 +46,30 @@ public class OfferManagementService {
 		}
 	}
 	
-	public void makeOffer(User customer, Car car) {
-		System.out.println();
-		System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
-		System.out.println("What is your offer on this car? (Do not include $ . or , in your input)");
-		String price = scan.nextLine();
-		if(!"".equals(price)) {
-			price = price.replaceAll("\\D", "");
-			int amount = Integer.parseInt(price);
-		
-			Offer offer = new Offer(car, customer, amount);
-			oDao.createOffer(offer);
-
+	public void makeOffer(User customer) {
+		cms.viewCars();
+		List<Car> carDB = cDao.readUnownedCars();
+		System.out.println("Provide car number you wish to put an offer on:");
+		String carNumStr = scan.nextLine();
+		if(!"".equals(carNumStr)) {
+			int carNum = stringToInteger(carNumStr);
+			if(carNum > 0 && carNum <= carDB.size()) {
+				Car car = carDB.get(carNum-1);
+				System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
+				System.out.println("What is your offer on this car? (Do not include $ . or , in your input)");
+				String price = scan.nextLine();
+				if(!"".equals(price)) {
+					int amount = stringToInteger(price);
+					Offer offer = new Offer(car, customer, amount);
+					oDao.createOffer(offer);
+				} else {
+					System.out.println("Invalid offer made.");
+				}
+			} else {
+				System.out.println("Valid car number not provided.");
+			}
 		} else {
-			System.out.println("Invalid offer");
+			System.out.println("Invalid selection");
 		}
 	}
 	
@@ -86,7 +100,6 @@ public class OfferManagementService {
 				oDao.updateOffer(offerDB.get(i));
 			}
 		}
-
 	}
 	
 	public void rejectOffer(Offer o) {

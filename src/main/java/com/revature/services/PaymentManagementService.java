@@ -62,12 +62,14 @@ public class PaymentManagementService {
 	
 	public void getCarPayments(User user) {
 		List<Payment> userPayments = pDao.readPaymentsByUser(user);
+		System.out.println();
 		if(userPayments.size() > 0) {
 			for(Payment p : userPayments) {
 				System.out.println("[" + (userPayments.indexOf(p) + 1) + "] Remaining Balance: $" + p.getRemainingBalance() + " on " + p.getCar().toString());
 			}
 			System.out.println("Provide car number you want to see your payments for:");
 			String payNumStr = scan.nextLine();
+			System.out.println();
 			if(!"".equals(payNumStr)) {
 				int payNum = stringToInteger(payNumStr);
 				if(payNum > 0 && payNum <= userPayments.size()) {

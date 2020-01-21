@@ -189,7 +189,7 @@ public class TestFunctions {
 	@Test
 	public void makeNewOffer() {
 		oms.viewOffers();
-		oms.makeOffer(cust2, car1);
+		oms.makeOffer(cust2);
 		oms.viewOffers();
 	}
 	
