@@ -36,6 +36,7 @@ public class OfferManagementService {
 	}
 	
 	public void makeOffer(User customer, Car car) {
+		System.out.println();
 		System.out.println("["+car.toString()+": Listed at $" + car.getPrice() + "]");
 		System.out.println("What is your offer on this car? (Do not include $ . or , in your input)");
 		String price = scan.nextLine();

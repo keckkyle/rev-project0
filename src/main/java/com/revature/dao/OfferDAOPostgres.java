@@ -93,7 +93,7 @@ public class OfferDAOPostgres implements OfferDAO {
 	
 	@Override
 	public List<Offer> readPendingOffers(){
-		String sql = "Select * from offer where status = 1";
+		String sql = "Select * from offer where status = 1 order by car_id";
 		
 		return returnOffers(sql);
 	}
