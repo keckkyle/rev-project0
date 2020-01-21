@@ -4,9 +4,7 @@ import java.util.List;
 import java.util.Scanner;
 
 import com.revature.dao.CarDAOPostgres;
-import com.revature.dao.PaymentDAOPostgres;
 import com.revature.pojos.Car;
-import com.revature.pojos.Payment;
 import com.revature.pojos.User;
 import com.revature.services.CarManagementService;
 import com.revature.services.OfferManagementService;
@@ -24,7 +22,6 @@ public class CustomerMenu {
 	private static PaymentManagementService pms = PaymentManagementService.getPMS();
 	
 	private static CarDAOPostgres cDao = CarDAOPostgres.getCarDAO();
-	private static PaymentDAOPostgres pDao = PaymentDAOPostgres.getPaymentDAO();
 	
 	private static CustomerMenu cm;
 	private static User current;
@@ -59,7 +56,6 @@ public class CustomerMenu {
 	
 	private void performUserSelection(String option) {
 		List<Car> carDB = cDao.readUnownedCars();
-		List<Payment> paymentDB = pDao.readAllPayments();
 		switch (option) {
 		case "1":
 			System.out.println();
@@ -87,30 +83,13 @@ public class CustomerMenu {
 		case "3":
 //view my cars
 			System.out.println();
-			pms.viewPayments(current);
+			cms.viewUserCars(current);
 			userWait();
 			break;
 		case "4":
 //view my payments
-			if(paymentDB.size() > 0) {
-				System.out.println();
-				pms.viewPayments(current);
-				System.out.println("Provide car number you want to see your payment for:");
-				String payNumStr = scan.nextLine();
-				if(!"".equals(payNumStr)) {
-					int payNum = stringToInteger(payNumStr);
-					if(payNum > 0 && payNum <= paymentDB.size()) {
-						pms.getCarPayments(payNum-1, current);
-					} else {
-						System.out.println("Invalid car number provided");
-					}
-				} else {
-					System.out.println("Valid number not provided");
-				}
-			} else {
-				System.out.println("No payment exists");
-			}
-			System.out.println();
+			pms.getCarPayments(current);
+			userWait();
 			break;
 		case "6":
 			System.out.println();

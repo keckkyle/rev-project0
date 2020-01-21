@@ -5,6 +5,7 @@ import java.util.Scanner;
 
 import com.revature.dao.CarDAOPostgres;
 import com.revature.pojos.Car;
+import com.revature.pojos.User;
 
 public class CarManagementService {
 //	private static LoggerUtil log = new LoggerUtil();
@@ -66,6 +67,18 @@ public class CarManagementService {
 	
 	public void removeCar(Car car) {
 		cDao.deleteCar(car);
+	}
+	
+	
+	public void viewUserCars(User user) {
+		List<Car> userCars = cDao.readCarsByUserId(user.getId());
+		if(userCars.size() < 1 ) {
+			System.out.println("No cars found");
+		} else {
+			for(Car c : userCars) {
+				System.out.println("[" + (userCars.indexOf(c) + 1) + "] " + c.toString());
+			}
+		}
 	}
 	
 //	public int getCarIndex(Car car) {
